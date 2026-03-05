@@ -1,0 +1,2081 @@
+<!DOCTYPE html>
+<html lang="en-CA">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Request a Consultation — Laser Centers for Health</title>
+<link href="https://fonts.bunny.net/css?family=montserrat:300,400,500,600,700,800&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --terracotta: #C16D4C;
+  --terracotta-light: #d4896d;
+  --terracotta-dark: #a85a3c;
+  --terracotta-bg: #fdf0ea;
+  --sage: #7A8C6E;
+  --sage-light: #a8b89a;
+  --sage-bg: #f0f3ec;
+  --charcoal: #3D3D3D;
+  --charcoal-mid: #626364;
+  --cream: #FDF8EE;
+  --cream-dark: #f5edd4;
+  --border: #e5ddd0;
+  --border-focus: #C16D4C;
+  --white: #ffffff;
+  --text-dark: #3D3D3D;
+  --text-mid: #626364;
+  --text-light: #8a8a8a;
+  --shadow: rgba(61,61,61,0.10);
+  --error: #c0392b;
+  --error-bg: #fdf2f0;
+  --success: #4a7a5a;
+  --success-bg: #f0f6f2;
+}
+
+body {
+  font-family: 'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  background: var(--cream);
+  color: var(--text-dark);
+  min-height: 100vh;
+  padding: 48px 16px 80px;
+}
+
+/* ── WRAPPER ── */
+.form-wrapper {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+/* ── HEADER ── */
+.form-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+.form-header .eyebrow {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.20em;
+  text-transform: uppercase;
+  color: var(--terracotta);
+  margin-bottom: 14px;
+}
+.form-header h1 {
+  font-size: clamp(22px, 4vw, 32px);
+  font-weight: 700;
+  color: var(--charcoal);
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+  margin-bottom: 14px;
+}
+.form-header p {
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--text-mid);
+  line-height: 1.75;
+  max-width: 520px;
+  margin: 0 auto;
+}
+.header-rule {
+  width: 40px;
+  height: 3px;
+  background: var(--terracotta);
+  margin: 18px auto 0;
+  border-radius: 2px;
+}
+
+/* ── PRIVACY BANNER ── */
+.privacy-banner {
+  background: var(--sage-bg);
+  border: 1px solid #c8d4be;
+  border-radius: 10px;
+  padding: 14px 18px;
+  margin-bottom: 28px;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+.privacy-banner svg { flex-shrink: 0; margin-top: 1px; }
+.privacy-banner p {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--sage);
+  line-height: 1.65;
+}
+
+/* ── SECTION CARDS ── */
+.form-section {
+  background: var(--white);
+  border-radius: 16px;
+  border: 1px solid var(--border);
+  margin-bottom: 20px;
+  overflow: hidden;
+  box-shadow: 0 2px 16px var(--shadow);
+}
+.section-title-bar {
+  padding: 20px 24px 0;
+}
+.section-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--terracotta);
+  margin-bottom: 4px;
+}
+.section-heading {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--charcoal);
+  margin-bottom: 20px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+}
+.section-body {
+  padding: 20px 24px 24px;
+}
+
+/* ── FIELD ROWS ── */
+.field-row {
+  display: flex;
+  gap: 14px;
+  margin-bottom: 16px;
+}
+.field-row.single { flex-direction: column; }
+.field-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1;
+}
+.field-group.half { flex: 0 0 calc(50% - 7px); }
+
+.field-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  color: var(--text-mid);
+}
+.field-label .req {
+  color: var(--terracotta);
+  margin-left: 2px;
+}
+.field-label .opt {
+  color: var(--text-light);
+  font-weight: 400;
+  letter-spacing: 0;
+  text-transform: none;
+  font-size: 10px;
+  margin-left: 4px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+select,
+textarea {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-dark);
+  background: var(--white);
+  border: 1.5px solid var(--border);
+  border-radius: 9px;
+  padding: 10px 13px;
+  outline: none;
+  transition: border-color 0.15s, box-shadow 0.15s;
+  width: 100%;
+  -webkit-appearance: none;
+  appearance: none;
+}
+input:focus, select:focus, textarea:focus {
+  border-color: var(--border-focus);
+  box-shadow: 0 0 0 3px rgba(193,109,76,0.12);
+}
+input.error, select.error, textarea.error {
+  border-color: var(--error);
+  box-shadow: 0 0 0 3px rgba(192,57,43,0.10);
+}
+textarea { resize: vertical; min-height: 110px; line-height: 1.65; }
+select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23626364' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  padding-right: 34px;
+}
+
+/* ── CHECKBOX & RADIO GROUPS ── */
+.check-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.check-group.inline {
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 8px 16px;
+}
+.check-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  user-select: none;
+}
+.check-item input[type="checkbox"],
+.check-item input[type="radio"] {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 18px;
+  height: 18px;
+  border: 2px solid var(--border);
+  border-radius: 5px;
+  background: var(--white);
+  flex-shrink: 0;
+  cursor: pointer;
+  transition: all 0.15s;
+  position: relative;
+  padding: 0;
+  margin: 0;
+  box-shadow: none;
+}
+.check-item input[type="radio"] { border-radius: 50%; }
+.check-item input[type="checkbox"]:checked {
+  background: var(--terracotta);
+  border-color: var(--terracotta);
+}
+.check-item input[type="checkbox"]:checked::after {
+  content: '';
+  position: absolute;
+  left: 3px;
+  top: 0px;
+  width: 7px;
+  height: 11px;
+  border: 2px solid white;
+  border-top: none;
+  border-left: none;
+  transform: rotate(45deg);
+}
+.check-item input[type="radio"]:checked {
+  background: var(--terracotta);
+  border-color: var(--terracotta);
+}
+.check-item input[type="radio"]:checked::after {
+  content: '';
+  position: absolute;
+  left: 3px; top: 3px;
+  width: 8px; height: 8px;
+  background: white;
+  border-radius: 50%;
+}
+.check-item label {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--charcoal);
+  cursor: pointer;
+  line-height: 1.4;
+}
+
+/* ── TREATMENT CHIPS ── */
+.treatment-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 8px;
+  margin-bottom: 8px;
+}
+.treatment-chip {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 10px 13px;
+  border: 1.5px solid var(--border);
+  border-radius: 9px;
+  cursor: pointer;
+  transition: all 0.15s;
+  background: var(--white);
+  user-select: none;
+}
+.treatment-chip:hover { border-color: var(--terracotta-light); background: #fdf8f5; }
+.treatment-chip.selected {
+  border-color: var(--terracotta);
+  background: var(--terracotta-bg);
+}
+.treatment-chip input {
+  display: none;
+}
+.chip-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--border);
+  flex-shrink: 0;
+  transition: background 0.15s;
+}
+.treatment-chip.selected .chip-dot { background: var(--terracotta); }
+.chip-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-dark);
+  line-height: 1.3;
+}
+.treatment-chip.selected .chip-label { color: var(--terracotta-dark); }
+
+/* ── CATEGORY DIVIDERS IN TREATMENTS ── */
+.treatment-category {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--sage);
+  margin: 16px 0 8px;
+}
+.treatment-category:first-child { margin-top: 0; }
+
+/* ── CALCULATOR TRIGGER NOTICE ── */
+.calc-trigger-notice {
+  display: none;
+  background: var(--terracotta-bg);
+  border: 1.5px solid var(--terracotta-light);
+  border-radius: 10px;
+  padding: 14px 16px;
+  margin-top: 14px;
+  align-items: center;
+  gap: 12px;
+}
+.calc-trigger-notice.visible { display: flex; }
+.calc-trigger-notice p {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--terracotta-dark);
+  line-height: 1.6;
+  flex: 1;
+}
+.calc-open-btn {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--white);
+  background: var(--terracotta);
+  border: none;
+  border-radius: 8px;
+  padding: 10px 16px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.15s;
+  flex-shrink: 0;
+}
+.calc-open-btn:hover { background: var(--terracotta-dark); }
+
+/* ── PASTED RESULTS FIELD ── */
+.pasted-results {
+  display: none;
+  margin-top: 12px;
+}
+.pasted-results.visible { display: block; }
+
+/* ── CONSENT BLOCK ── */
+.consent-block {
+  background: var(--cream);
+  border-radius: 10px;
+  padding: 16px;
+  margin-bottom: 16px;
+}
+.consent-text {
+  font-size: 11px;
+  font-weight: 400;
+  color: var(--text-mid);
+  line-height: 1.75;
+  margin-bottom: 12px;
+}
+
+/* ── SUBMIT BUTTON ── */
+.submit-section {
+  margin-top: 8px;
+}
+.submit-btn {
+  width: 100%;
+  padding: 16px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  color: var(--white);
+  background: var(--terracotta);
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s;
+}
+.submit-btn:hover { background: var(--terracotta-dark); }
+.submit-btn:active { transform: scale(0.99); }
+.submit-btn:disabled { background: var(--text-light); cursor: not-allowed; }
+
+.form-note {
+  text-align: center;
+  margin-top: 12px;
+  font-size: 10px;
+  font-weight: 400;
+  color: var(--text-light);
+  line-height: 1.7;
+}
+
+/* ── ERROR MESSAGE ── */
+.field-error {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--error);
+  margin-top: 4px;
+  display: none;
+}
+.field-error.visible { display: block; }
+.form-error-banner {
+  background: var(--error-bg);
+  border: 1px solid #e8bdb9;
+  border-radius: 10px;
+  padding: 14px 18px;
+  margin-bottom: 20px;
+  display: none;
+}
+.form-error-banner.visible { display: block; }
+.form-error-banner p {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--error);
+  line-height: 1.6;
+}
+
+/* ── SUCCESS STATE ── */
+.success-screen {
+  display: none;
+  text-align: center;
+  padding: 60px 24px;
+}
+.success-screen.visible { display: block; }
+.success-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: var(--success-bg);
+  margin: 0 auto 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.success-screen h2 {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--charcoal);
+  margin-bottom: 12px;
+}
+.success-screen p {
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--text-mid);
+  line-height: 1.75;
+  max-width: 440px;
+  margin: 0 auto 32px;
+}
+.return-home-btn {
+  display: inline-block;
+  padding: 14px 32px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  color: var(--white);
+  background: var(--terracotta);
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+.return-home-btn:hover { background: var(--terracotta-dark); border-bottom: none; }
+
+/* ── PHONE CONDITIONAL ── */
+.phone-input-row {
+  display: flex;
+  gap: 8px;
+  align-items: stretch;
+}
+.country-code-select {
+  flex: 0 0 auto;
+  width: 140px;
+  font-size: 12px;
+  padding-right: 28px;
+}
+.phone-conditional {
+  display: none;
+  margin-top: 14px;
+}
+.phone-conditional.visible { display: block; }
+
+/* ════════════════════════════════════════════
+   ADDICTION CALCULATOR MODAL
+   ════════════════════════════════════════════ */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(30,25,20,0.65);
+  z-index: 1000;
+  display: none;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 20px 12px;
+  overflow-y: auto;
+  backdrop-filter: blur(3px);
+}
+.modal-overlay.open { display: flex; }
+
+.modal-panel {
+  background: var(--cream);
+  border-radius: 20px;
+  width: 100%;
+  max-width: 760px;
+  margin: auto;
+  position: relative;
+  box-shadow: 0 24px 80px rgba(30,25,20,0.35);
+  animation: modalSlideIn 0.28s cubic-bezier(0.34,1.2,0.64,1);
+}
+@keyframes modalSlideIn {
+  from { opacity: 0; transform: translateY(24px) scale(0.97); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 22px 28px 18px;
+  border-bottom: 1px solid var(--border);
+  background: var(--white);
+  border-radius: 20px 20px 0 0;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+.modal-header-left .eyebrow {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--terracotta);
+  margin-bottom: 3px;
+}
+.modal-header-left h2 {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--charcoal);
+  letter-spacing: -0.01em;
+}
+.modal-close {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1.5px solid var(--border);
+  background: var(--white);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s;
+  flex-shrink: 0;
+}
+.modal-close:hover { background: var(--cream-dark); border-color: var(--terracotta-light); }
+.modal-close svg { color: var(--charcoal-mid); }
+
+.modal-copy-bar {
+  background: var(--sage-bg);
+  border-bottom: 1px solid #c8d4be;
+  padding: 10px 28px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.modal-copy-bar p {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--sage);
+  line-height: 1.5;
+  flex: 1;
+}
+.modal-copy-bar strong { color: var(--charcoal-mid); }
+
+.modal-body {
+  padding: 24px 28px 32px;
+}
+
+/* ── CALC SECTION CARDS ── */
+.calc-section-card {
+  background: var(--white);
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  margin-bottom: 14px;
+  overflow: hidden;
+  box-shadow: 0 1px 8px rgba(61,61,61,0.07);
+}
+.calc-section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  cursor: pointer;
+  user-select: none;
+  background: var(--white);
+  transition: background 0.15s;
+}
+.calc-section-header:hover { background: #faf7f2; }
+.calc-section-header-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.calc-section-title-text .title {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--charcoal);
+}
+.calc-section-title-text .sub {
+  font-size: 10px;
+  font-weight: 500;
+  color: var(--text-light);
+  margin-top: 1px;
+}
+.calc-section-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.calc-badge {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--terracotta);
+  background: var(--terracotta-bg);
+  padding: 3px 9px;
+  border-radius: 20px;
+  display: none;
+}
+.chevron {
+  width: 18px; height: 18px;
+  color: var(--charcoal-mid);
+  transition: transform 0.25s;
+  flex-shrink: 0;
+}
+.calc-section-card.open .chevron { transform: rotate(180deg); }
+.calc-section-body {
+  display: none;
+  padding: 0 20px 20px;
+  border-top: 1px solid var(--border);
+}
+.calc-section-card.open .calc-section-body { display: block; }
+
+/* ── SUBSTANCE ROWS ── */
+.substance-row {
+  padding: 14px 0;
+  border-bottom: 1px solid #f0ece4;
+}
+.substance-row:last-child { border-bottom: none; padding-bottom: 0; }
+.substance-row:first-child { padding-top: 16px; }
+.substance-top {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.substance-checkbox {
+  appearance: none; -webkit-appearance: none;
+  width: 18px; height: 18px;
+  border: 2px solid var(--border);
+  border-radius: 5px;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: all 0.15s;
+  position: relative;
+  background: var(--white);
+  padding: 0; margin: 0;
+}
+.substance-checkbox:checked {
+  background: var(--terracotta);
+  border-color: var(--terracotta);
+}
+.substance-checkbox:checked::after {
+  content: '';
+  position: absolute;
+  left: 3px; top: 0px;
+  width: 7px; height: 11px;
+  border: 2px solid white;
+  border-top: none; border-left: none;
+  transform: rotate(45deg);
+}
+.substance-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--charcoal);
+  cursor: pointer;
+  flex: 1;
+}
+.substance-label small {
+  font-weight: 400;
+  color: var(--text-light);
+  font-size: 10px;
+  display: block;
+  margin-top: 1px;
+}
+
+.substance-controls {
+  display: none;
+  margin-top: 12px;
+  margin-left: 28px;
+  background: var(--cream);
+  border-radius: 9px;
+  padding: 12px 14px;
+  flex-direction: column;
+  gap: 10px;
+}
+.substance-controls.visible { display: flex; }
+.controls-row {
+  display: flex;
+  gap: 8px;
+  align-items: flex-end;
+  flex-wrap: wrap;
+}
+.control-group {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  flex: 1;
+  min-width: 110px;
+}
+.control-group label {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-light);
+}
+.control-group input[type="number"] {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-dark);
+  background: var(--white);
+  border: 1.5px solid var(--border);
+  border-radius: 8px;
+  padding: 8px 10px;
+  outline: none;
+  transition: border-color 0.15s;
+  width: 100%;
+  -webkit-appearance: none;
+}
+.control-group input[type="number"]:focus { border-color: var(--terracotta); }
+
+.freq-toggle {
+  display: flex;
+  background: var(--white);
+  border: 1.5px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  height: 36px;
+  flex-shrink: 0;
+}
+.freq-btn {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  padding: 0 10px;
+  border: none;
+  background: transparent;
+  color: var(--text-light);
+  cursor: pointer;
+  transition: all 0.15s;
+  white-space: nowrap;
+}
+.freq-btn.active { background: var(--terracotta); color: var(--white); }
+.freq-btn:not(.active):hover { background: var(--cream-dark); }
+
+.price-note {
+  font-size: 9px;
+  font-weight: 500;
+  color: var(--text-light);
+  font-style: italic;
+}
+.row-cost {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--terracotta);
+  text-align: right;
+}
+.substance-group-label {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--sage);
+  padding: 12px 0 6px;
+  border-bottom: 1px solid #f0ece4;
+}
+
+/* ── CALC RESULTS ── */
+.calc-results {
+  background: var(--charcoal);
+  border-radius: 14px;
+  padding: 26px 24px;
+  margin-top: 20px;
+  position: relative;
+  overflow: hidden;
+}
+.calc-results::before {
+  content: '';
+  position: absolute;
+  top: -50px; right: -50px;
+  width: 160px; height: 160px;
+  background: var(--terracotta);
+  opacity: 0.12;
+  border-radius: 50%;
+}
+.calc-results-title {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--sage-light);
+  margin-bottom: 18px;
+}
+.calc-results-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+.calc-result-card {
+  background: rgba(255,255,255,0.07);
+  border-radius: 10px;
+  padding: 16px;
+  border: 1px solid rgba(255,255,255,0.09);
+}
+.calc-result-card.highlight {
+  background: var(--terracotta);
+  border-color: var(--terracotta-dark);
+}
+.calc-result-label {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.5);
+  margin-bottom: 6px;
+}
+.calc-result-card.highlight .calc-result-label { color: rgba(255,255,255,0.75); }
+.calc-result-amount {
+  font-size: clamp(22px, 4vw, 32px);
+  font-weight: 800;
+  color: var(--white);
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+.calc-result-amount .dollar { font-size: 0.55em; font-weight: 500; color: rgba(255,255,255,0.6); vertical-align: super; margin-right: 1px; }
+.calc-result-sublabel { font-size: 10px; color: rgba(255,255,255,0.4); margin-top: 4px; }
+
+.breakdown { margin-top: 4px; }
+.breakdown-title {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.35);
+  margin-bottom: 8px;
+}
+.breakdown-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  font-size: 11px;
+}
+.breakdown-item:last-child { border-bottom: none; }
+.breakdown-name { font-weight: 500; color: rgba(255,255,255,0.65); }
+.breakdown-cost { font-weight: 700; color: var(--white); }
+
+.reflection-box {
+  background: rgba(201,201,156,0.12);
+  border: 1px solid rgba(201,201,156,0.25);
+  border-radius: 9px;
+  padding: 14px 16px;
+  margin-top: 16px;
+}
+.reflection-box p {
+  font-size: 11px;
+  font-weight: 500;
+  color: rgba(255,255,255,0.70);
+  line-height: 1.7;
+}
+.reflection-box strong { color: var(--sage-light); font-weight: 700; }
+
+.calc-empty { text-align: center; padding: 16px 0 4px; }
+.calc-empty p { font-size: 12px; color: rgba(255,255,255,0.35); font-style: italic; }
+
+.calc-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 14px;
+}
+.calc-copy-btn {
+  flex: 1;
+  padding: 13px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--white);
+  background: var(--terracotta);
+  border: none;
+  border-radius: 9px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.calc-copy-btn:hover { background: var(--terracotta-dark); }
+.calc-copy-btn.copied { background: #4a7a5a; }
+.calc-reset-btn {
+  padding: 13px 18px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.45);
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 9px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.calc-reset-btn:hover { color: rgba(255,255,255,0.75); border-color: rgba(255,255,255,0.3); }
+
+.modal-footer {
+  padding: 0 28px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: stretch;
+}
+.modal-done-btn {
+  padding: 13px 28px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--white);
+  background: var(--terracotta);
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.15s;
+  flex: 1;
+}
+.modal-done-btn:hover { background: var(--terracotta-dark); }
+.modal-footer-note {
+  font-size: 11px;
+  font-weight: 400;
+  color: var(--text-light);
+  font-style: italic;
+  line-height: 1.5;
+  text-align: center;
+}
+
+.calc-disclaimer {
+  text-align: center;
+  margin-top: 16px;
+  font-size: 9px;
+  color: var(--text-light);
+  line-height: 1.7;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 560px) {
+  body { padding: 24px 12px 60px; }
+  .field-row { flex-direction: column; }
+  .field-group.half { flex: 1; }
+  .calc-results-grid { grid-template-columns: 1fr; }
+  .controls-row { flex-direction: column; }
+  .control-group { min-width: 100%; }
+  .modal-header { padding: 16px 18px 14px; }
+  .modal-body { padding: 16px 18px 24px; }
+  .modal-footer { padding: 0 18px 22px; flex-direction: column; }
+  .modal-done-btn { width: 100%; }
+  .treatment-grid { grid-template-columns: 1fr 1fr; }
+  .section-body { padding: 16px 18px 20px; }
+  .section-title-bar { padding: 16px 18px 0; }
+}
+</style>
+</head>
+<body>
+
+<!-- ════════ FORM ════════ -->
+<div class="form-wrapper" id="form-wrapper">
+
+  <div class="form-header">
+    <div class="eyebrow">Laser Centers for Health · Nanaimo, BC</div>
+    <h1>Request a Private Consultation</h1>
+    <p>Complete the form below and a member of our clinical team will be in touch within one business day. All information is strictly confidential.</p>
+    <div class="header-rule"></div>
+  </div>
+
+  <div class="privacy-banner">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#7A8C6E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+    <p>We collect contact information only to communicate with you for the purposes you have requested. All information provided is strictly confidential. We will never sell or share your personal information for any purpose.</p>
+  </div>
+
+  <div class="form-error-banner" id="form-error-banner">
+    <p>Please review the highlighted fields before submitting.</p>
+  </div>
+
+  <form id="contact-form" action="https://formspree.io/f/xbdanlea" method="POST" novalidate autocomplete="on">
+
+    <!-- Hidden fields for Formspree -->
+    <input type="hidden" name="_subject" value="New Client Inquiry from Website">
+    <input type="hidden" name="_cc" value="triveniwest@gmail.com">
+    <input type="hidden" name="_next" value="">
+    <input type="hidden" name="Submission Time (Pacific)" id="submission-time">
+    <input type="text" name="_gotcha" style="display:none">
+
+    <!-- ── SECTION 1: CONTACT INFO ── -->
+    <div class="form-section">
+      <div class="section-title-bar">
+        <div class="section-label">Step 1</div>
+        <div class="section-heading">Your contact information</div>
+      </div>
+      <div class="section-body">
+
+        <div class="field-row">
+          <div class="field-group">
+            <label class="field-label" for="first-name">First name <span class="req">*</span></label>
+            <input type="text" id="first-name" name="first_name" autocomplete="given-name" required>
+            <span class="field-error" id="err-first-name">Please enter your first name.</span>
+          </div>
+          <div class="field-group">
+            <label class="field-label" for="last-name">Last name <span class="req">*</span></label>
+            <input type="text" id="last-name" name="last_name" autocomplete="family-name" required>
+            <span class="field-error" id="err-last-name">Please enter your last name.</span>
+          </div>
+        </div>
+
+        <div class="field-row">
+          <div class="field-group">
+            <label class="field-label" for="email">Email address <span class="req">*</span></label>
+            <input type="email" id="email" name="email" autocomplete="email" required>
+            <span class="field-error" id="err-email">Please enter a valid email address.</span>
+          </div>
+        </div>
+
+        <div class="field-row single">
+          <div class="field-group">
+            <label class="field-label">Preferred contact method <span class="req">*</span></label>
+            <div class="check-group inline" id="contact-method-group">
+              <label class="check-item">
+                <input type="checkbox" name="contact_method[]" value="Email"> <label>Email</label>
+              </label>
+              <label class="check-item">
+                <input type="checkbox" name="contact_method[]" value="Phone" onchange="togglePhoneField()"> <label>Phone</label>
+              </label>
+              <label class="check-item">
+                <input type="checkbox" name="contact_method[]" value="Text" onchange="togglePhoneField()"> <label>Text</label>
+              </label>
+            </div>
+            <span class="field-error" id="err-contact-method">Please select at least one contact method.</span>
+          </div>
+        </div>
+
+        <div class="phone-conditional" id="phone-field">
+          <div class="field-group">
+            <label class="field-label" for="phone">Phone number <span class="req">*</span></label>
+            <div class="phone-input-row">
+              <select id="country-code" name="country_code" class="country-code-select" autocomplete="tel-country-code">
+                <option value="+1">🇨🇦 +1 (CA)</option>
+                <option value="+1-US">🇺🇸 +1 (US)</option>
+                <option value="+44">🇬🇧 +44 (UK)</option>
+                <option value="+61">🇦🇺 +61 (AU)</option>
+                <option value="+64">🇳🇿 +64 (NZ)</option>
+                <option value="+353">🇮🇪 +353 (IE)</option>
+                <option value="+49">🇩🇪 +49 (DE)</option>
+                <option value="+33">🇫🇷 +33 (FR)</option>
+                <option value="+31">🇳🇱 +31 (NL)</option>
+                <option value="+46">🇸🇪 +46 (SE)</option>
+                <option value="+47">🇳🇴 +47 (NO)</option>
+                <option value="+45">🇩🇰 +45 (DK)</option>
+                <option value="+41">🇨🇭 +41 (CH)</option>
+                <option value="+852">🇭🇰 +852 (HK)</option>
+                <option value="+65">🇸🇬 +65 (SG)</option>
+                <option value="+63">🇵🇭 +63 (PH)</option>
+                <option value="+91">🇮🇳 +91 (IN)</option>
+                <option value="+81">🇯🇵 +81 (JP)</option>
+                <option value="+82">🇰🇷 +82 (KR)</option>
+                <option value="+886">🇹🇼 +886 (TW)</option>
+                <option value="+52">🇲🇽 +52 (MX)</option>
+                <option value="+55">🇧🇷 +55 (BR)</option>
+                <option value="+54">🇦🇷 +54 (AR)</option>
+                <option value="+56">🇨🇱 +56 (CL)</option>
+              </select>
+              <input type="tel" id="phone" name="phone" autocomplete="tel-national" placeholder="e.g. (250) 555-0100" style="flex:1;">
+            </div>
+            <span class="field-error" id="err-phone">Please enter your phone number.</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ── SECTION 2: CONSULTATION TYPE ── -->
+    <div class="form-section">
+      <div class="section-title-bar">
+        <div class="section-label">Step 2</div>
+        <div class="section-heading">Consultation format</div>
+      </div>
+      <div class="section-body">
+
+        <div class="field-group" style="margin-bottom:16px;">
+          <label class="field-label">How would you like to meet? <span class="req">*</span></label>
+          <div class="check-group" id="consult-format-group">
+            <label class="check-item">
+              <input type="radio" name="consultation_format" value="In-person (Nanaimo, BC clinic)" required>
+              <label>In-person — Nanaimo, BC clinic</label>
+            </label>
+            <label class="check-item">
+              <input type="radio" name="consultation_format" value="Video consultation">
+              <label>Video consultation <span style="font-size:11px; font-weight:400; color:var(--text-light);">(coming soon)</span></label>
+            </label>
+            <label class="check-item">
+              <input type="radio" name="consultation_format" value="Phone consultation">
+              <label>Phone consultation</label>
+            </label>
+          </div>
+          <span class="field-error" id="err-consult-format">Please select a consultation format.</span>
+        </div>
+
+
+
+      </div>
+    </div>
+
+    <!-- ── SECTION 3: TREATMENTS ── -->
+    <div class="form-section">
+      <div class="section-title-bar">
+        <div class="section-label">Step 3</div>
+        <div class="section-heading">Areas of concern</div>
+      </div>
+      <div class="section-body">
+
+        <p style="font-size:12px; color:var(--text-mid); line-height:1.65; margin-bottom:18px;">Select all that apply to your situation. This helps us understand your needs before your consultation.</p>
+
+        <div class="treatment-category">Addictions</div>
+        <div class="treatment-grid" id="treatment-chips">
+          <label class="treatment-chip" data-addiction="true">
+            <input type="checkbox" name="treatments[]" value="Drug Addiction (Prescription / Recreational)" onchange="handleTreatmentChange()">
+            <span class="chip-dot"></span><span class="chip-label">Drug Addiction</span>
+          </label>
+          <label class="treatment-chip" data-addiction="true">
+            <input type="checkbox" name="treatments[]" value="Alcohol Addiction" onchange="handleTreatmentChange()">
+            <span class="chip-dot"></span><span class="chip-label">Alcohol Addiction</span>
+          </label>
+          <label class="treatment-chip" data-addiction="true">
+            <input type="checkbox" name="treatments[]" value="Nicotine Addiction" onchange="handleTreatmentChange()">
+            <span class="chip-dot"></span><span class="chip-label">Nicotine Addiction</span>
+          </label>
+          <label class="treatment-chip" data-addiction="true">
+            <input type="checkbox" name="treatments[]" value="Food Addiction" onchange="handleTreatmentChange()">
+            <span class="chip-dot"></span><span class="chip-label">Food Addiction</span>
+          </label>
+          <label class="treatment-chip" data-addiction="true">
+            <input type="checkbox" name="treatments[]" value="Sugar Addiction" onchange="handleTreatmentChange()">
+            <span class="chip-dot"></span><span class="chip-label">Sugar Addiction</span>
+          </label>
+          <label class="treatment-chip" data-addiction="true">
+            <input type="checkbox" name="treatments[]" value="Caffeine Addiction" onchange="handleTreatmentChange()">
+            <span class="chip-dot"></span><span class="chip-label">Caffeine Addiction</span>
+          </label>
+          <label class="treatment-chip" data-addiction="true">
+            <input type="checkbox" name="treatments[]" value="Gambling Addiction" onchange="handleTreatmentChange()">
+            <span class="chip-dot"></span><span class="chip-label">Gambling Addiction</span>
+          </label>
+          <label class="treatment-chip" data-addiction="true">
+            <input type="checkbox" name="treatments[]" value="Gaming Addiction" onchange="handleTreatmentChange()">
+            <span class="chip-dot"></span><span class="chip-label">Gaming Addiction</span>
+          </label>
+          <label class="treatment-chip" data-addiction="true">
+            <input type="checkbox" name="treatments[]" value="Phone / Internet Addiction" onchange="handleTreatmentChange()">
+            <span class="chip-dot"></span><span class="chip-label">Phone / Internet</span>
+          </label>
+        </div>
+
+        <div class="treatment-category" style="margin-top:18px;">Mental Health</div>
+        <div class="treatment-grid">
+          <label class="treatment-chip">
+            <input type="checkbox" name="treatments[]" value="Depression" onchange="handleTreatmentChange()">
+            <span class="chip-dot"></span><span class="chip-label">Depression</span>
+          </label>
+          <label class="treatment-chip">
+            <input type="checkbox" name="treatments[]" value="Anxiety" onchange="handleTreatmentChange()">
+            <span class="chip-dot"></span><span class="chip-label">Anxiety</span>
+          </label>
+          <label class="treatment-chip">
+            <input type="checkbox" name="treatments[]" value="Chronic Stress" onchange="handleTreatmentChange()">
+            <span class="chip-dot"></span><span class="chip-label">Chronic Stress</span>
+          </label>
+          <label class="treatment-chip">
+            <input type="checkbox" name="treatments[]" value="Insomnia" onchange="handleTreatmentChange()">
+            <span class="chip-dot"></span><span class="chip-label">Insomnia</span>
+          </label>
+          <label class="treatment-chip">
+            <input type="checkbox" name="treatments[]" value="Panic Attacks" onchange="handleTreatmentChange()">
+            <span class="chip-dot"></span><span class="chip-label">Panic Attacks</span>
+          </label>
+          <label class="treatment-chip">
+            <input type="checkbox" name="treatments[]" value="PTSD" onchange="handleTreatmentChange()">
+            <span class="chip-dot"></span><span class="chip-label">PTSD</span>
+          </label>
+          <label class="treatment-chip">
+            <input type="checkbox" name="treatments[]" value="Chronic Pain" onchange="handleTreatmentChange()">
+            <span class="chip-dot"></span><span class="chip-label">Chronic Pain</span>
+          </label>
+        </div>
+
+        <div class="treatment-category" style="margin-top:18px;">Nervous System</div>
+        <div class="treatment-grid">
+          <label class="treatment-chip">
+            <input type="checkbox" name="treatments[]" value="ADHD" onchange="handleTreatmentChange()">
+            <span class="chip-dot"></span><span class="chip-label">ADHD</span>
+          </label>
+          <label class="treatment-chip">
+            <input type="checkbox" name="treatments[]" value="Parkinson's Disease" onchange="handleTreatmentChange()">
+            <span class="chip-dot"></span><span class="chip-label">Parkinson's Disease</span>
+          </label>
+          <label class="treatment-chip">
+            <input type="checkbox" name="treatments[]" value="Tourette Syndrome" onchange="handleTreatmentChange()">
+            <span class="chip-dot"></span><span class="chip-label">Tourette Syndrome</span>
+          </label>
+          <label class="treatment-chip">
+            <input type="checkbox" name="treatments[]" value="Nail Biting" onchange="handleTreatmentChange()">
+            <span class="chip-dot"></span><span class="chip-label">Nail Biting</span>
+          </label>
+        </div>
+
+        <!-- Addiction calculator trigger notice -->
+        <div class="calc-trigger-notice" id="calc-trigger-notice">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#C16D4C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
+          <p>You've selected one or more addiction treatments. Our financial awareness tool can help you understand the cost of your addiction and share that information with our clinical team.</p>
+          <button type="button" class="calc-open-btn" onclick="openCalculator()">Open Calculator</button>
+        </div>
+
+        <!-- Pasted results field -->
+        <div class="pasted-results" id="pasted-results">
+          <div class="field-group">
+            <label class="field-label" for="calc-results-field">
+              Addiction cost calculator results
+              <span class="opt">(optional — paste your results here)</span>
+            </label>
+            <textarea id="calc-results-field" name="addiction_calculator_results" rows="5" placeholder="After using the calculator above, copy your results and paste them here. This helps us understand your situation and design a program tailored to you."></textarea>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ── SECTION 4: MESSAGE ── -->
+    <div class="form-section">
+      <div class="section-title-bar">
+        <div class="section-label">Step 4</div>
+        <div class="section-heading">Your message</div>
+      </div>
+      <div class="section-body">
+        <div class="field-group">
+          <label class="field-label" for="message">Tell us more about what you're going through <span class="req">*</span></label>
+          <textarea id="message" name="message" rows="6" required placeholder="Please provide as much detail about your inquiry or situation as you're comfortable sharing. This information helps us answer your questions and design a program that's right for you. All information is strictly confidential."></textarea>
+          <span class="field-error" id="err-message">Please tell us a little about what you're going through.</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── SECTION 5: CONSENT & SUBMIT ── -->
+    <div class="form-section">
+      <div class="section-title-bar">
+        <div class="section-label">Step 5</div>
+        <div class="section-heading">Consent & submission</div>
+      </div>
+      <div class="section-body">
+
+        <div class="consent-block">
+          <p class="consent-text">By submitting this form, you consent to Laser Centers for Health contacting you using the information you have provided above, for the purposes of responding to your inquiry and discussing treatment options. Your information is held in strict confidence and will never be shared with or sold to third parties.</p>
+          <label class="check-item">
+            <input type="checkbox" id="consent-privacy" name="consent_privacy" value="Agreed" required>
+            <label for="consent-privacy">I agree to the above and consent to being contacted by Laser Centers for Health.</label>
+          </label>
+          <span class="field-error" id="err-consent">Please confirm your consent to proceed.</span>
+        </div>
+
+        <div class="submit-section">
+          <button type="submit" class="submit-btn" id="submit-btn">Submit Inquiry</button>
+        </div>
+        <p class="form-note">We aim to respond within one business day. If you require urgent support, please call us directly<br>or contact the BC Crisis Line at 1-800-784-2433.</p>
+
+      </div>
+    </div>
+
+  </form>
+
+  <!-- SUCCESS SCREEN -->
+  <div class="success-screen" id="success-screen">
+    <div class="success-icon">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#4a7a5a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+    </div>
+    <h2>Thank you — we've received your inquiry.</h2>
+    <p>A member of our clinical team will be in touch within one business day. All information you've shared is kept in strict confidence.</p>
+    <a href="https://lasercentersforhealth.ca" class="return-home-btn">Return to Laser Centers for Health</a>
+  </div>
+
+</div>
+
+<!-- ════════ CALCULATOR MODAL ════════ -->
+<div class="modal-overlay" id="calc-modal" onclick="handleModalClick(event)">
+  <div class="modal-panel" id="modal-panel">
+
+    <div class="modal-header">
+      <div class="modal-header-left">
+        <div class="eyebrow">Financial Awareness Tool</div>
+        <h2>Calculate what your addiction is costing you</h2>
+      </div>
+      <button class="modal-close" onclick="closeCalculator()" aria-label="Close">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+
+    <div class="modal-copy-bar">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#7A8C6E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      <p>Select the substances that apply, enter your usage, then click <strong>Copy My Results</strong> and paste them into the form below.</p>
+    </div>
+
+    <div class="modal-body">
+
+      <!-- NICOTINE -->
+      <div class="calc-section-card" id="sec-nicotine">
+        <div class="calc-section-header" onclick="toggleSection('sec-nicotine')">
+          <div class="calc-section-header-left">
+            <div class="calc-section-title-text">
+              <div class="title">Nicotine</div>
+              <div class="sub">Cigarettes, vaping, pouches &amp; more</div>
+            </div>
+          </div>
+          <div class="calc-section-right">
+            <div class="calc-badge" id="badge-nicotine"></div>
+            <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+        </div>
+        <div class="calc-section-body">
+          <div class="substance-row"><div class="substance-top"><input type="checkbox" class="substance-checkbox" id="chk-cigarettes" onchange="toggleControls('cigarettes')"><label class="substance-label" for="chk-cigarettes">Cigarettes — factory-made<small>Pre-rolled commercial cigarettes</small></label></div><div class="substance-controls" id="ctrl-cigarettes"><div class="controls-row"><div class="control-group"><label>How many cigarettes</label><input type="number" id="qty-cigarettes" min="0" value="" placeholder="e.g. 10" oninput="recalculate()"></div><div class="control-group" style="flex:0;"><label>Frequency</label><div class="freq-toggle"><button class="freq-btn active" id="freq-cigarettes-d" onclick="setFreq('cigarettes','d')">Daily</button><button class="freq-btn" id="freq-cigarettes-w" onclick="setFreq('cigarettes','w')">Weekly</button></div></div><div class="control-group"><label>Cost per pack (20) — CAD $</label><input type="number" id="price-cigarettes" min="0" step="0.01" value="" oninput="recalculate()" placeholder="19.00"></div></div><div class="price-note" id="note-cigarettes"></div><div class="row-cost" id="cost-cigarettes">$0 / mo</div></div></div>
+          <div class="substance-row"><div class="substance-top"><input type="checkbox" class="substance-checkbox" id="chk-ryo" onchange="toggleControls('ryo')"><label class="substance-label" for="chk-ryo">Cigarettes — roll-your-own<small>Loose tobacco, papers &amp; filters</small></label></div><div class="substance-controls" id="ctrl-ryo"><div class="controls-row"><div class="control-group"><label>How many cigarettes</label><input type="number" id="qty-ryo" min="0" value="" placeholder="e.g. 10" oninput="recalculate()"></div><div class="control-group" style="flex:0;"><label>Frequency</label><div class="freq-toggle"><button class="freq-btn active" id="freq-ryo-d" onclick="setFreq('ryo','d')">Daily</button><button class="freq-btn" id="freq-ryo-w" onclick="setFreq('ryo','w')">Weekly</button></div></div><div class="control-group"><label>Cost per pouch (25g, ~50 cigs) — CAD $</label><input type="number" id="price-ryo" min="0" step="0.01" value="" oninput="recalculate()" placeholder="12.00"></div></div><div class="price-note" id="note-ryo"></div><div class="row-cost" id="cost-ryo">$0 / mo</div></div></div>
+          <div class="substance-row"><div class="substance-top"><input type="checkbox" class="substance-checkbox" id="chk-vape" onchange="toggleControls('vape')"><label class="substance-label" for="chk-vape">Nicotine vape / e-cigarette<small>Disposables or refillable pods</small></label></div><div class="substance-controls" id="ctrl-vape"><div class="controls-row"><div class="control-group"><label>Devices / pods</label><input type="number" id="qty-vape" min="0" value="" placeholder="e.g. 2" oninput="recalculate()"></div><div class="control-group" style="flex:0;"><label>Frequency</label><div class="freq-toggle"><button class="freq-btn" id="freq-vape-d" onclick="setFreq('vape','d')">Daily</button><button class="freq-btn active" id="freq-vape-w" onclick="setFreq('vape','w')">Weekly</button></div></div><div class="control-group"><label>Cost per device/pod — CAD $</label><input type="number" id="price-vape" min="0" step="0.01" value="" oninput="recalculate()" placeholder="18.00"></div></div><div class="price-note" id="note-vape"></div><div class="row-cost" id="cost-vape">$0 / mo</div></div></div>
+          <div class="substance-row"><div class="substance-top"><input type="checkbox" class="substance-checkbox" id="chk-patch" onchange="toggleControls('patch')"><label class="substance-label" for="chk-patch">Nicotine patches<small>OTC replacement therapy</small></label></div><div class="substance-controls" id="ctrl-patch"><div class="controls-row"><div class="control-group"><label>Number of patches</label><input type="number" id="qty-patch" min="0" value="" placeholder="e.g. 7" oninput="recalculate()"></div><div class="control-group" style="flex:0;"><label>Frequency</label><div class="freq-toggle"><button class="freq-btn" id="freq-patch-d" onclick="setFreq('patch','d')">Daily</button><button class="freq-btn active" id="freq-patch-w" onclick="setFreq('patch','w')">Weekly</button></div></div><div class="control-group"><label>Cost per patch — CAD $</label><input type="number" id="price-patch" min="0" step="0.01" value="" oninput="recalculate()" placeholder="2.50"></div></div><div class="price-note" id="note-patch"></div><div class="row-cost" id="cost-patch">$0 / mo</div></div></div>
+          <div class="substance-row"><div class="substance-top"><input type="checkbox" class="substance-checkbox" id="chk-gum" onchange="toggleControls('gum')"><label class="substance-label" for="chk-gum">Nicotine gum<small>2 mg or 4 mg</small></label></div><div class="substance-controls" id="ctrl-gum"><div class="controls-row"><div class="control-group"><label>Pieces</label><input type="number" id="qty-gum" min="0" value="" placeholder="e.g. 8" oninput="recalculate()"></div><div class="control-group" style="flex:0;"><label>Frequency</label><div class="freq-toggle"><button class="freq-btn active" id="freq-gum-d" onclick="setFreq('gum','d')">Daily</button><button class="freq-btn" id="freq-gum-w" onclick="setFreq('gum','w')">Weekly</button></div></div><div class="control-group"><label>Cost per piece — CAD $</label><input type="number" id="price-gum" min="0" step="0.01" value="" oninput="recalculate()" placeholder="0.80"></div></div><div class="price-note" id="note-gum"></div><div class="row-cost" id="cost-gum">$0 / mo</div></div></div>
+          <div class="substance-row"><div class="substance-top"><input type="checkbox" class="substance-checkbox" id="chk-pouches" onchange="toggleControls('pouches')"><label class="substance-label" for="chk-pouches">Nicotine pouches<small>Zyn, Rogue, On! etc.</small></label></div><div class="substance-controls" id="ctrl-pouches"><div class="controls-row"><div class="control-group"><label>Cans</label><input type="number" id="qty-pouches" min="0" value="" placeholder="e.g. 2" oninput="recalculate()"></div><div class="control-group" style="flex:0;"><label>Frequency</label><div class="freq-toggle"><button class="freq-btn" id="freq-pouches-d" onclick="setFreq('pouches','d')">Daily</button><button class="freq-btn active" id="freq-pouches-w" onclick="setFreq('pouches','w')">Weekly</button></div></div><div class="control-group"><label>Cost per can — CAD $</label><input type="number" id="price-pouches" min="0" step="0.01" value="" oninput="recalculate()" placeholder="14.00"></div></div><div class="price-note" id="note-pouches"></div><div class="row-cost" id="cost-pouches">$0 / mo</div></div></div>
+          <div class="substance-row"><div class="substance-top"><input type="checkbox" class="substance-checkbox" id="chk-cigars" onchange="toggleControls('cigars')"><label class="substance-label" for="chk-cigars">Cigars<small>Premium or machine-made</small></label></div><div class="substance-controls" id="ctrl-cigars"><div class="controls-row"><div class="control-group"><label>Number of cigars</label><input type="number" id="qty-cigars" min="0" value="" placeholder="e.g. 3" oninput="recalculate()"></div><div class="control-group" style="flex:0;"><label>Frequency</label><div class="freq-toggle"><button class="freq-btn" id="freq-cigars-d" onclick="setFreq('cigars','d')">Daily</button><button class="freq-btn active" id="freq-cigars-w" onclick="setFreq('cigars','w')">Weekly</button></div></div><div class="control-group"><label>Cost per cigar — CAD $</label><input type="number" id="price-cigars" min="0" step="0.01" value="" oninput="recalculate()" placeholder="12.00"></div></div><div class="price-note" id="note-cigars"></div><div class="row-cost" id="cost-cigars">$0 / mo</div></div></div>
+          <div class="substance-row"><div class="substance-top"><input type="checkbox" class="substance-checkbox" id="chk-chew" onchange="toggleControls('chew')"><label class="substance-label" for="chk-chew">Chewing tobacco / snuff<small>Loose leaf, plug, or dry snuff</small></label></div><div class="substance-controls" id="ctrl-chew"><div class="controls-row"><div class="control-group"><label>Tins / pouches</label><input type="number" id="qty-chew" min="0" value="" placeholder="e.g. 2" oninput="recalculate()"></div><div class="control-group" style="flex:0;"><label>Frequency</label><div class="freq-toggle"><button class="freq-btn" id="freq-chew-d" onclick="setFreq('chew','d')">Daily</button><button class="freq-btn active" id="freq-chew-w" onclick="setFreq('chew','w')">Weekly</button></div></div><div class="control-group"><label>Cost per tin — CAD $</label><input type="number" id="price-chew" min="0" step="0.01" value="" oninput="recalculate()" placeholder="16.00"></div></div><div class="price-note" id="note-chew"></div><div class="row-cost" id="cost-chew">$0 / mo</div></div></div>
+          <div class="substance-row"><div class="substance-top"><input type="checkbox" class="substance-checkbox" id="chk-lozenges" onchange="toggleControls('lozenges')"><label class="substance-label" for="chk-lozenges">Nicotine lozenges / mints<small>Mini-lozenges or mints</small></label></div><div class="substance-controls" id="ctrl-lozenges"><div class="controls-row"><div class="control-group"><label>Pieces</label><input type="number" id="qty-lozenges" min="0" value="" placeholder="e.g. 6" oninput="recalculate()"></div><div class="control-group" style="flex:0;"><label>Frequency</label><div class="freq-toggle"><button class="freq-btn active" id="freq-lozenges-d" onclick="setFreq('lozenges','d')">Daily</button><button class="freq-btn" id="freq-lozenges-w" onclick="setFreq('lozenges','w')">Weekly</button></div></div><div class="control-group"><label>Cost per piece — CAD $</label><input type="number" id="price-lozenges" min="0" step="0.01" value="" oninput="recalculate()" placeholder="0.75"></div></div><div class="price-note" id="note-lozenges"></div><div class="row-cost" id="cost-lozenges">$0 / mo</div></div></div>
+          <div class="substance-row"><div class="substance-top"><input type="checkbox" class="substance-checkbox" id="chk-inhaler" onchange="toggleControls('inhaler')"><label class="substance-label" for="chk-inhaler">Nicotine inhaler<small>Prescription inhalation cartridges</small></label></div><div class="substance-controls" id="ctrl-inhaler"><div class="controls-row"><div class="control-group"><label>Cartridges</label><input type="number" id="qty-inhaler" min="0" value="" placeholder="e.g. 10" oninput="recalculate()"></div><div class="control-group" style="flex:0;"><label>Frequency</label><div class="freq-toggle"><button class="freq-btn" id="freq-inhaler-d" onclick="setFreq('inhaler','d')">Daily</button><button class="freq-btn active" id="freq-inhaler-w" onclick="setFreq('inhaler','w')">Weekly</button></div></div><div class="control-group"><label>Cost per cartridge — CAD $</label><input type="number" id="price-inhaler" min="0" step="0.01" value="" oninput="recalculate()" placeholder="2.00"></div></div><div class="price-note" id="note-inhaler"></div><div class="row-cost" id="cost-inhaler">$0 / mo</div></div></div>
+          <div class="substance-row"><div class="substance-top"><input type="checkbox" class="substance-checkbox" id="chk-nasal" onchange="toggleControls('nasal')"><label class="substance-label" for="chk-nasal">Nicotine nasal spray<small>Prescription Nicotrol NS</small></label></div><div class="substance-controls" id="ctrl-nasal"><div class="controls-row"><div class="control-group"><label>Bottles used</label><input type="number" id="qty-nasal" min="0" value="" placeholder="e.g. 2" oninput="recalculate()"></div><div class="control-group" style="flex:0;"><label>Frequency</label><div class="freq-toggle"><button class="freq-btn" id="freq-nasal-d" onclick="setFreq('nasal','d')">Daily</button><button class="freq-btn active" id="freq-nasal-w" onclick="setFreq('nasal','w')">Weekly</button></div></div><div class="control-group"><label>Cost per bottle — CAD $</label><input type="number" id="price-nasal" min="0" step="0.01" value="" oninput="recalculate()" placeholder="55.00"></div></div><div class="price-note" id="note-nasal"></div><div class="row-cost" id="cost-nasal">$0 / mo</div></div></div>
+          <div class="substance-row"><div class="substance-top"><input type="checkbox" class="substance-checkbox" id="chk-pipe" onchange="toggleControls('pipe')"><label class="substance-label" for="chk-pipe">Pipe tobacco<small>Loose-leaf smoking pipe</small></label></div><div class="substance-controls" id="ctrl-pipe"><div class="controls-row"><div class="control-group"><label>Pouches (50g)</label><input type="number" id="qty-pipe" min="0" value="" placeholder="e.g. 2" oninput="recalculate()"></div><div class="control-group" style="flex:0;"><label>Frequency</label><div class="freq-toggle"><button class="freq-btn" id="freq-pipe-d" onclick="setFreq('pipe','d')">Daily</button><button class="freq-btn active" id="freq-pipe-w" onclick="setFreq('pipe','w')">Weekly</button></div></div><div class="control-group"><label>Cost per pouch — CAD $</label><input type="number" id="price-pipe" min="0" step="0.01" value="" oninput="recalculate()" placeholder="28.00"></div></div><div class="price-note" id="note-pipe"></div><div class="row-cost" id="cost-pipe">$0 / mo</div></div></div>
+        </div>
+      </div>
+
+      <!-- ALCOHOL -->
+      <div class="calc-section-card" id="sec-alcohol">
+        <div class="calc-section-header" onclick="toggleSection('sec-alcohol')">
+          <div class="calc-section-header-left">
+            <div class="calc-section-title-text">
+              <div class="title">Alcohol</div>
+              <div class="sub">Beer, wine, spirits &amp; more</div>
+            </div>
+          </div>
+          <div class="calc-section-right">
+            <div class="calc-badge" id="badge-alcohol"></div>
+            <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+        </div>
+        <div class="calc-section-body">
+          <div class="substance-row"><div class="substance-top"><input type="checkbox" class="substance-checkbox" id="chk-beer" onchange="toggleControls('beer')"><label class="substance-label" for="chk-beer">Beer<small>Cans, bottles or draught</small></label></div><div class="substance-controls" id="ctrl-beer"><div class="controls-row"><div class="control-group"><label>Number of drinks</label><input type="number" id="qty-beer" min="0" value="" placeholder="e.g. 10" oninput="recalculate()"></div><div class="control-group" style="flex:0;"><label>Frequency</label><div class="freq-toggle"><button class="freq-btn" id="freq-beer-d" onclick="setFreq('beer','d')">Daily</button><button class="freq-btn active" id="freq-beer-w" onclick="setFreq('beer','w')">Weekly</button></div></div><div class="control-group"><label>Cost per drink — CAD $</label><input type="number" id="price-beer" min="0" step="0.01" value="" oninput="recalculate()" placeholder="3.50"></div></div><div class="price-note" id="note-beer"></div><div class="row-cost" id="cost-beer">$0 / mo</div></div></div>
+          <div class="substance-row"><div class="substance-top"><input type="checkbox" class="substance-checkbox" id="chk-wine" onchange="toggleControls('wine')"><label class="substance-label" for="chk-wine">Wine<small>Red, white, rosé or sparkling</small></label></div><div class="substance-controls" id="ctrl-wine"><div class="controls-row"><div class="control-group"><label>Number of glasses</label><input type="number" id="qty-wine" min="0" value="" placeholder="e.g. 7" oninput="recalculate()"></div><div class="control-group" style="flex:0;"><label>Frequency</label><div class="freq-toggle"><button class="freq-btn" id="freq-wine-d" onclick="setFreq('wine','d')">Daily</button><button class="freq-btn active" id="freq-wine-w" onclick="setFreq('wine','w')">Weekly</button></div></div><div class="control-group"><label>Cost per glass — CAD $</label><input type="number" id="price-wine" min="0" step="0.01" value="" oninput="recalculate()" placeholder="5.00"></div></div><div class="price-note" id="note-wine"></div><div class="row-cost" id="cost-wine">$0 / mo</div></div></div>
+          <div class="substance-row"><div class="substance-top"><input type="checkbox" class="substance-checkbox" id="chk-spirits" onchange="toggleControls('spirits')"><label class="substance-label" for="chk-spirits">Spirits / liquor<small>Vodka, whisky, rum, gin etc.</small></label></div><div class="substance-controls" id="ctrl-spirits"><div class="controls-row"><div class="control-group"><label>Number of drinks</label><input type="number" id="qty-spirits" min="0" value="" placeholder="e.g. 7" oninput="recalculate()"></div><div class="control-group" style="flex:0;"><label>Frequency</label><div class="freq-toggle"><button class="freq-btn" id="freq-spirits-d" onclick="setFreq('spirits','d')">Daily</button><button class="freq-btn active" id="freq-spirits-w" onclick="setFreq('spirits','w')">Weekly</button></div></div><div class="control-group"><label>Cost per drink — CAD $</label><input type="number" id="price-spirits" min="0" step="0.01" value="" oninput="recalculate()" placeholder="4.00"></div></div><div class="price-note" id="note-spirits"></div><div class="row-cost" id="cost-spirits">$0 / mo</div></div></div>
+          <div class="substance-row"><div class="substance-top"><input type="checkbox" class="substance-checkbox" id="chk-cocktails" onchange="toggleControls('cocktails')"><label class="substance-label" for="chk-cocktails">Bar / restaurant drinks<small>Cocktails, bar pints, restaurant wine</small></label></div><div class="substance-controls" id="ctrl-cocktails"><div class="controls-row"><div class="control-group"><label>Number of drinks</label><input type="number" id="qty-cocktails" min="0" value="" placeholder="e.g. 4" oninput="recalculate()"></div><div class="control-group" style="flex:0;"><label>Frequency</label><div class="freq-toggle"><button class="freq-btn" id="freq-cocktails-d" onclick="setFreq('cocktails','d')">Daily</button><button class="freq-btn active" id="freq-cocktails-w" onclick="setFreq('cocktails','w')">Weekly</button></div></div><div class="control-group"><label>Cost per drink — CAD $</label><input type="number" id="price-cocktails" min="0" step="0.01" value="" oninput="recalculate()" placeholder="14.00"></div></div><div class="price-note" id="note-cocktails"></div><div class="row-cost" id="cost-cocktails">$0 / mo</div></div></div>
+          <div class="substance-row"><div class="substance-top"><input type="checkbox" class="substance-checkbox" id="chk-coolers" onchange="toggleControls('coolers')"><label class="substance-label" for="chk-coolers">Coolers, ciders &amp; seltzers<small>Ready-to-drink cans</small></label></div><div class="substance-controls" id="ctrl-coolers"><div class="controls-row"><div class="control-group"><label>Number of cans</label><input type="number" id="qty-coolers" min="0" value="" placeholder="e.g. 6" oninput="recalculate()"></div><div class="control-group" style="flex:0;"><label>Frequency</label><div class="freq-toggle"><button class="freq-btn" id="freq-coolers-d" onclick="setFreq('coolers','d')">Daily</button><button class="freq-btn active" id="freq-coolers-w" onclick="setFreq('coolers','w')">Weekly</button></div></div><div class="control-group"><label>Cost per can — CAD $</label><input type="number" id="price-coolers" min="0" step="0.01" value="" oninput="recalculate()" placeholder="4.00"></div></div><div class="price-note" id="note-coolers"></div><div class="row-cost" id="cost-coolers">$0 / mo</div></div></div>
+        </div>
+      </div>
+
+      <!-- DRUGS -->
+      <div class="calc-section-card" id="sec-drugs">
+        <div class="calc-section-header" onclick="toggleSection('sec-drugs')">
+          <div class="calc-section-header-left">
+            <div class="calc-section-title-text">
+              <div class="title">Drugs (prescription &amp; recreational)</div>
+              <div class="sub">Opioids, stimulants, cannabis, benzodiazepines &amp; more</div>
+            </div>
+          </div>
+          <div class="calc-section-right">
+            <div class="calc-badge" id="badge-drugs"></div>
+            <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+        </div>
+        <div class="calc-section-body">
+          <div class="substance-group-label">Cannabis</div>
+          <div class="substance-row"><div class="substance-top"><input type="checkbox" class="substance-checkbox" id="chk-cannabis" onchange="toggleControls('cannabis')"><label class="substance-label" for="chk-cannabis">Cannabis — flower / dried herb<small>Legal or grey-market BC bud</small></label></div><div class="substance-controls" id="ctrl-cannabis"><div class="controls-row"><div class="control-group"><label>Grams</label><input type="number" id="qty-cannabis" min="0" step="0.5" value="" placeholder="e.g. 3.5" oninput="recalculate()"></div><div class="control-group" style="flex:0;"><label>Frequency</label><div class="freq-toggle"><button class="freq-btn" id="freq-cannabis-d" onclick="setFreq('cannabis','d')">Daily</button><button class="freq-btn active" id="freq-cannabis-w" onclick="setFreq('cannabis','w')">Weekly</button></div></div><div class="control-group"><label>Cost per gram — CAD $</label><input type="number" id="price-cannabis" min="0" step="0.01" value="" oninput="recalculate()" placeholder="9.00"></div></div><div class="price-note" id="note-cannabis"></div><div class="row-cost" id="cost-cannabis">$0 / mo</div></div></div>
+          <div class="substance-row"><div class="substance-top"><input type="checkbox" class="substance-checkbox" id="chk-hashish" onchange="toggleControls('hashish')"><label class="substance-label" for="chk-hashish">Hashish<small>Hash, charas, bubble hash, rosin, live resin</small></label></div><div class="substance-controls" id="ctrl-hashish"><div class="controls-row"><div class="control-group"><label>Grams</label><input type="number" id="qty-hashish" min="0" step="0.5" value="" placeholder="e.g. 2" oninput="recalculate()"></div><div class="control-group" style="flex:0;"><label>Frequency</label><div class="freq-toggle"><button class="freq-btn" id="freq-hashish-d" onclick="setFreq('hashish','d')">Daily</button><button class="freq-btn active" id="freq-hashish-w" onclick="setFreq('hashish','w')">Weekly</button></div></div><div class="control-group"><label>Cost per gram — CAD $</label><input type="number" id="price-hashish" min="0" step="0.01" value="" oninput="recalculate()" placeholder="12.00"></div></div><div class="price-note" id="note-hashish"></div><div class="row-cost" id="cost-hashish">$0 / mo</div></div></div>
+          <div class="substance-row"><div class="substance-top"><input type="checkbox" class="substance-checkbox" id="chk-cannabisedibles" onchange="toggleControls('cannabisedibles')"><label class="substance-label" for="chk-cannabisedibles">Cannabis edibles &amp; concentrates<small>Gummies, wax, shatter, vape cartridges</small></label></div><div class="substance-controls" id="ctrl-cannabisedibles"><div class="controls-row"><div class="control-group"><label>Units</label><input type="number" id="qty-cannabisedibles" min="0" value="" placeholder="e.g. 3" oninput="recalculate()"></div><div class="control-group" style="flex:0;"><label>Frequency</label><div class="freq-toggle"><button class="freq-btn" id="freq-cannabisedibles-d" onclick="setFreq('cannabisedibles','d')">Daily</button><button class="freq-btn active" id="freq-cannabisedibles-w" onclick="setFreq('cannabisedibles','w')">Weekly</button></div></div><div class="control-group"><label>Cost per unit — CAD $</label><input type="number" id="price-cannabisedibles" min="0" step="0.01" value="" oninput="recalculate()" placeholder="8.00"></div></div><div class="price-note" id="note-cannabisedibles"></div><div class="row-cost" id="cost-cannabisedibles">$0 / mo</div></div></div>
+          <div class="substance-group-label">Opioids</div>
+          <div class="substance-row"><div class="substance-top"><input type="checkbox" class="substance-checkbox" id="chk-heroin" onchange="toggleControls('heroin')"><label class="substance-label" for="chk-heroin">Heroin / street opioids<small>Down, black tar, #4 heroin</small></label></div><div class="substance-controls" id="ctrl-heroin"><div class="controls-row"><div class="control-group"><label>Grams</label><input type="number" id="qty-heroin" min="0" step="0.1" value="" placeholder="e.g. 0.5" oninput="recalculate()"></div><div class="control-group" style="flex:0;"><label>Frequency</label><div class="freq-toggle"><button class="freq-btn active" id="freq-heroin-d" onclick="setFreq('heroin','d')">Daily</button><button class="freq-btn" id="freq-heroin-w" onclick="setFreq('heroin','w')">Weekly</button></div></div><div class="control-group"><label>Cost per gram — CAD $</label><input type="number" id="price-heroin" min="0" step="0.01" value="" oninput="recalculate()" placeholder="80.00"></div></div><div class="price-note" id="note-heroin"></div><div class="row-cost" id="cost-heroin">$0 / mo</div></div></div>
+          <div class="substance-row"><div class="substance-top"><input type="checkbox" class="substance-checkbox" id="chk-fentanyl" onchange="toggleControls('fentanyl')"><label class="substance-label" for="chk-fentanyl">Fentanyl / carfentanil<small>Patches, powder, pressed pills</small></label></div><div class="substance-controls" id="ctrl-fentanyl"><div class="controls-row"><div class="control-group"><label>Points (0.1g)</label><input type="number" id="qty-fentanyl" min="0" step="0.5" value="" placeholder="e.g. 3" oninput="recalculate()"></div><div class="control-group" style="flex:0;"><label>Frequency</label><div class="freq-toggle"><button class="freq-btn active" id="freq-fentanyl-d" onclick="setFreq('fentanyl','d')">Daily</button><button class="freq-btn" id="freq-fentanyl-w" onclick="setFreq('fentanyl','w')">Weekly</button></div></div><div class="control-group"><label>Cost per point — CAD $</label><input type="number" id="price-fentanyl" min="0" step="0.01" value="" oninput="recalculate()" placeholder="20.00"></div></div><div class="price-note" id="note-fentanyl"></div><div class="row-cost" id="cost-fentanyl">$0 / mo</div></div></div>
+          <div class="substance-row"><div class="substance-top"><input type="checkbox" class="substance-checkbox" id="chk-oxycodone" onchange="toggleControls('oxycodone')"><label class="substance-label" for="chk-oxycodone">Pain medication<small>Oxycodone, hydromorphone, morphine, codeine</small></label></div><div class="substance-controls" id="ctrl-oxycodone"><div class="controls-row"><div class="control-group"><label>Pills</label><input type="number" id="qty-oxycodone" min="0" value="" placeholder="e.g. 4" oninput="recalculate()"></div><div class="control-group" style="flex:0;"><label>Frequency</label><div class="freq-toggle"><button class="freq-btn active" id="freq-oxycodone-d" onclick="setFreq('oxycodone','d')">Daily</button><button class="freq-btn" id="freq-oxycodone-w" onclick="setFreq('oxycodone','w')">Weekly</button></div></div><div class="control-group"><label>Cost per pill — CAD $</label><input type="number" id="price-oxycodone" min="0" step="0.01" value="" oninput="recalculate()" placeholder="20.00"></div></div><div class="price-note" id="note-oxycodone"></div><div class="row-cost" id="cost-oxycodone">$0 / mo</div></div></div>
+          <div class="substance-group-label">Stimulants</div>
+          <div class="substance-row"><div class="substance-top"><input type="checkbox" class="substance-checkbox" id="chk-cocaine" onchange="toggleControls('cocaine')"><label class="substance-label" for="chk-cocaine">Cocaine (powder)<small>Powder cocaine, nose candy</small></label></div><div class="substance-controls" id="ctrl-cocaine"><div class="controls-row"><div class="control-group"><label>Grams</label><input type="number" id="qty-cocaine" min="0" step="0.25" value="" placeholder="e.g. 1" oninput="recalculate()"></div><div class="control-group" style="flex:0;"><label>Frequency</label><div class="freq-toggle"><button class="freq-btn" id="freq-cocaine-d" onclick="setFreq('cocaine','d')">Daily</button><button class="freq-btn active" id="freq-cocaine-w" onclick="setFreq('cocaine','w')">Weekly</button></div></div><div class="control-group"><label>Cost per gram — CAD $</label><input type="number" id="price-cocaine" min="0" step="0.01" value="" oninput="recalculate()" placeholder="90.00"></div></div><div class="price-note" id="note-cocaine"></div><div class="row-cost" id="cost-cocaine">$0 / mo</div></div></div>
+          <div class="substance-row"><div class="substance-top"><input type="checkbox" class="substance-checkbox" id="chk-crack" onchange="toggleControls('crack')"><label class="substance-label" for="chk-crack">Crack cocaine<small>Freebase cocaine, rock</small></label></div><div class="substance-controls" id="ctrl-crack"><div class="controls-row"><div class="control-group"><label>Rocks / points</label><input type="number" id="qty-crack" min="0" value="" placeholder="e.g. 3" oninput="recalculate()"></div><div class="control-group" style="flex:0;"><label>Frequency</label><div class="freq-toggle"><button class="freq-btn active" id="freq-crack-d" onclick="setFreq('crack','d')">Daily</button><button class="freq-btn" id="freq-crack-w" onclick="setFreq('crack','w')">Weekly</button></div></div><div class="control-group"><label>Cost per rock / point — CAD $</label><input type="number" id="price-crack" min="0" step="0.01" value="" oninput="recalculate()" placeholder="20.00"></div></div><div class="price-note" id="note-crack"></div><div class="row-cost" id="cost-crack">$0 / mo</div></div></div>
+          <div class="substance-row"><div class="substance-top"><input type="checkbox" class="substance-checkbox" id="chk-meth" onchange="toggleControls('meth')"><label class="substance-label" for="chk-meth">Methamphetamine / crystal meth<small>Crystal, speed, ice</small></label></div><div class="substance-controls" id="ctrl-meth"><div class="controls-row"><div class="control-group"><label>Grams</label><input type="number" id="qty-meth" min="0" step="0.25" value="" placeholder="e.g. 1" oninput="recalculate()"></div><div class="control-group" style="flex:0;"><label>Frequency</label><div class="freq-toggle"><button class="freq-btn" id="freq-meth-d" onclick="setFreq('meth','d')">Daily</button><button class="freq-btn active" id="freq-meth-w" onclick="setFreq('meth','w')">Weekly</button></div></div><div class="control-group"><label>Cost per gram — CAD $</label><input type="number" id="price-meth" min="0" step="0.01" value="" oninput="recalculate()" placeholder="60.00"></div></div><div class="price-note" id="note-meth"></div><div class="row-cost" id="cost-meth">$0 / mo</div></div></div>
+          <div class="substance-group-label">Sedatives, tranquillisers &amp; sleeping pills</div>
+          <div class="substance-row"><div class="substance-top"><input type="checkbox" class="substance-checkbox" id="chk-benzos" onchange="toggleControls('benzos')"><label class="substance-label" for="chk-benzos">Benzodiazepines<small>Xanax, Ativan, Valium, Clonazepam, Klonopin</small></label></div><div class="substance-controls" id="ctrl-benzos"><div class="controls-row"><div class="control-group"><label>Pills</label><input type="number" id="qty-benzos" min="0" value="" placeholder="e.g. 2" oninput="recalculate()"></div><div class="control-group" style="flex:0;"><label>Frequency</label><div class="freq-toggle"><button class="freq-btn active" id="freq-benzos-d" onclick="setFreq('benzos','d')">Daily</button><button class="freq-btn" id="freq-benzos-w" onclick="setFreq('benzos','w')">Weekly</button></div></div><div class="control-group"><label>Cost per pill — CAD $</label><input type="number" id="price-benzos" min="0" step="0.01" value="" oninput="recalculate()" placeholder="8.00"></div></div><div class="price-note" id="note-benzos"></div><div class="row-cost" id="cost-benzos">$0 / mo</div></div></div>
+          <div class="substance-row"><div class="substance-top"><input type="checkbox" class="substance-checkbox" id="chk-sleepingpills" onchange="toggleControls('sleepingpills')"><label class="substance-label" for="chk-sleepingpills">Sleeping pills / Z-drugs<small>Zopiclone, Ambien (Zolpidem), Sonata</small></label></div><div class="substance-controls" id="ctrl-sleepingpills"><div class="controls-row"><div class="control-group"><label>Pills</label><input type="number" id="qty-sleepingpills" min="0" value="" placeholder="e.g. 1" oninput="recalculate()"></div><div class="control-group" style="flex:0;"><label>Frequency</label><div class="freq-toggle"><button class="freq-btn active" id="freq-sleepingpills-d" onclick="setFreq('sleepingpills','d')">Daily</button><button class="freq-btn" id="freq-sleepingpills-w" onclick="setFreq('sleepingpills','w')">Weekly</button></div></div><div class="control-group"><label>Cost per pill — CAD $</label><input type="number" id="price-sleepingpills" min="0" step="0.01" value="" oninput="recalculate()" placeholder="6.00"></div></div><div class="price-note" id="note-sleepingpills"></div><div class="row-cost" id="cost-sleepingpills">$0 / mo</div></div></div>
+          <div class="substance-group-label">Dissociatives &amp; psychedelics</div>
+          <div class="substance-row"><div class="substance-top"><input type="checkbox" class="substance-checkbox" id="chk-ketamine" onchange="toggleControls('ketamine')"><label class="substance-label" for="chk-ketamine">Ketamine<small>Special K, vitamin K — powder or liquid</small></label></div><div class="substance-controls" id="ctrl-ketamine"><div class="controls-row"><div class="control-group"><label>Grams</label><input type="number" id="qty-ketamine" min="0" step="0.25" value="" placeholder="e.g. 0.5" oninput="recalculate()"></div><div class="control-group" style="flex:0;"><label>Frequency</label><div class="freq-toggle"><button class="freq-btn" id="freq-ketamine-d" onclick="setFreq('ketamine','d')">Daily</button><button class="freq-btn active" id="freq-ketamine-w" onclick="setFreq('ketamine','w')">Weekly</button></div></div><div class="control-group"><label>Cost per gram — CAD $</label><input type="number" id="price-ketamine" min="0" step="0.01" value="" oninput="recalculate()" placeholder="70.00"></div></div><div class="price-note" id="note-ketamine"></div><div class="row-cost" id="cost-ketamine">$0 / mo</div></div></div>
+          <div class="substance-row"><div class="substance-top"><input type="checkbox" class="substance-checkbox" id="chk-mdma" onchange="toggleControls('mdma')"><label class="substance-label" for="chk-mdma">MDMA / ecstasy<small>Molly, pills, powder</small></label></div><div class="substance-controls" id="ctrl-mdma"><div class="controls-row"><div class="control-group"><label>Uses</label><input type="number" id="qty-mdma" min="0" value="" placeholder="e.g. 1" oninput="recalculate()"></div><div class="control-group" style="flex:0;"><label>Frequency</label><div class="freq-toggle"><button class="freq-btn" id="freq-mdma-d" onclick="setFreq('mdma','d')">Daily</button><button class="freq-btn active" id="freq-mdma-w" onclick="setFreq('mdma','w')">Weekly</button></div></div><div class="control-group"><label>Cost per use — CAD $</label><input type="number" id="price-mdma" min="0" step="0.01" value="" oninput="recalculate()" placeholder="40.00"></div></div><div class="price-note" id="note-mdma"></div><div class="row-cost" id="cost-mdma">$0 / mo</div></div></div>
+        </div>
+      </div>
+
+      <!-- GAMBLING -->
+      <div class="calc-section-card" id="sec-gambling">
+        <div class="calc-section-header" onclick="toggleSection('sec-gambling')">
+          <div class="calc-section-header-left">
+            <div class="calc-section-title-text">
+              <div class="title">Gambling</div>
+              <div class="sub">Casino, sports betting, lottery &amp; poker</div>
+            </div>
+          </div>
+          <div class="calc-section-right">
+            <div class="calc-badge" id="badge-gambling"></div>
+            <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+        </div>
+        <div class="calc-section-body">
+          <div class="substance-row"><div class="substance-top"><input type="checkbox" class="substance-checkbox" id="chk-casino" onchange="toggleControls('casino')"><label class="substance-label" for="chk-casino">Casino / slot machines<small>In-person or online casino</small></label></div><div class="substance-controls" id="ctrl-casino"><div class="controls-row"><div class="control-group"><label>Sessions</label><input type="number" id="qty-casino" min="0" value="" placeholder="e.g. 2" oninput="recalculate()"></div><div class="control-group" style="flex:0;"><label>Frequency</label><div class="freq-toggle"><button class="freq-btn" id="freq-casino-d" onclick="setFreq('casino','d')">Daily</button><button class="freq-btn active" id="freq-casino-w" onclick="setFreq('casino','w')">Weekly</button></div></div><div class="control-group"><label>Avg. net loss per session — CAD $</label><input type="number" id="price-casino" min="0" step="1" value="" placeholder="e.g. 150" oninput="recalculate()"></div></div><div class="price-note">Enter your average net loss per session (after any winnings)</div><div class="row-cost" id="cost-casino">$0 / mo</div></div></div>
+          <div class="substance-row"><div class="substance-top"><input type="checkbox" class="substance-checkbox" id="chk-sportsbetting" onchange="toggleControls('sportsbetting')"><label class="substance-label" for="chk-sportsbetting">Sports betting<small>BetMGM, Bet365, Proline, DraftKings etc.</small></label></div><div class="substance-controls" id="ctrl-sportsbetting"><div class="controls-row"><div class="control-group"><label>Bets</label><input type="number" id="qty-sportsbetting" min="0" value="" placeholder="e.g. 5" oninput="recalculate()"></div><div class="control-group" style="flex:0;"><label>Frequency</label><div class="freq-toggle"><button class="freq-btn" id="freq-sportsbetting-d" onclick="setFreq('sportsbetting','d')">Daily</button><button class="freq-btn active" id="freq-sportsbetting-w" onclick="setFreq('sportsbetting','w')">Weekly</button></div></div><div class="control-group"><label>Avg. amount wagered per bet — CAD $</label><input type="number" id="price-sportsbetting" min="0" step="1" value="" placeholder="e.g. 30" oninput="recalculate()"></div></div><div class="price-note">Calculated using ~10% long-term house edge</div><div class="row-cost" id="cost-sportsbetting">$0 / mo</div></div></div>
+          <div class="substance-row"><div class="substance-top"><input type="checkbox" class="substance-checkbox" id="chk-lottery" onchange="toggleControls('lottery')"><label class="substance-label" for="chk-lottery">Lottery / scratch tickets<small>Lotto 6/49, Lotto Max, BC49, scratch &amp; wins</small></label></div><div class="substance-controls" id="ctrl-lottery"><div class="controls-row"><div class="control-group"><label>Total amount spent — CAD $</label><input type="number" id="qty-lottery" min="0" value="" placeholder="e.g. 20" oninput="recalculate()"></div><div class="control-group" style="flex:0;"><label>Frequency</label><div class="freq-toggle"><button class="freq-btn" id="freq-lottery-d" onclick="setFreq('lottery','d')">Daily</button><button class="freq-btn active" id="freq-lottery-w" onclick="setFreq('lottery','w')">Weekly</button></div></div></div><div class="price-note">Enter your total weekly or daily spend on lottery and scratch tickets</div><div class="row-cost" id="cost-lottery">$0 / mo</div></div></div>
+          <div class="substance-row"><div class="substance-top"><input type="checkbox" class="substance-checkbox" id="chk-poker" onchange="toggleControls('poker')"><label class="substance-label" for="chk-poker">Online poker / card games<small>PokerStars, GGPoker, BC online casino</small></label></div><div class="substance-controls" id="ctrl-poker"><div class="controls-row"><div class="control-group"><label>Sessions</label><input type="number" id="qty-poker" min="0" value="" placeholder="e.g. 3" oninput="recalculate()"></div><div class="control-group" style="flex:0;"><label>Frequency</label><div class="freq-toggle"><button class="freq-btn" id="freq-poker-d" onclick="setFreq('poker','d')">Daily</button><button class="freq-btn active" id="freq-poker-w" onclick="setFreq('poker','w')">Weekly</button></div></div><div class="control-group"><label>Avg. net loss per session — CAD $</label><input type="number" id="price-poker" min="0" step="1" value="" placeholder="e.g. 80" oninput="recalculate()"></div></div><div class="price-note">Enter your average net loss per session</div><div class="row-cost" id="cost-poker">$0 / mo</div></div></div>
+        </div>
+      </div>
+
+      <!-- CAFFEINE -->
+      <div class="calc-section-card" id="sec-caffeine">
+        <div class="calc-section-header" onclick="toggleSection('sec-caffeine')">
+          <div class="calc-section-header-left">
+            <div class="calc-section-title-text">
+              <div class="title">Caffeine</div>
+              <div class="sub">Coffee, energy drinks, cola &amp; tea</div>
+            </div>
+          </div>
+          <div class="calc-section-right">
+            <div class="calc-badge" id="badge-caffeine"></div>
+            <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+        </div>
+        <div class="calc-section-body">
+          <div class="substance-row"><div class="substance-top"><input type="checkbox" class="substance-checkbox" id="chk-coffee" onchange="toggleControls('coffee')"><label class="substance-label" for="chk-coffee">Coffee — purchased<small>Café lattes, Americanos, Tim Hortons, Starbucks etc.</small></label></div><div class="substance-controls" id="ctrl-coffee"><div class="controls-row"><div class="control-group"><label>Coffees</label><input type="number" id="qty-coffee" min="0" value="" placeholder="e.g. 2" oninput="recalculate()"></div><div class="control-group" style="flex:0;"><label>Frequency</label><div class="freq-toggle"><button class="freq-btn active" id="freq-coffee-d" onclick="setFreq('coffee','d')">Daily</button><button class="freq-btn" id="freq-coffee-w" onclick="setFreq('coffee','w')">Weekly</button></div></div><div class="control-group"><label>Cost per coffee — CAD $</label><input type="number" id="price-coffee" min="0" step="0.01" value="" oninput="recalculate()" placeholder="6.50"></div></div><div class="price-note" id="note-coffee"></div><div class="row-cost" id="cost-coffee">$0 / mo</div></div></div>
+          <div class="substance-row"><div class="substance-top"><input type="checkbox" class="substance-checkbox" id="chk-coffeehome" onchange="toggleControls('coffeehome')"><label class="substance-label" for="chk-coffeehome">Coffee — made at home<small>Beans, ground coffee, pods (Nespresso, Keurig etc.)</small></label></div><div class="substance-controls" id="ctrl-coffeehome"><div class="controls-row"><div class="control-group"><label>Cups</label><input type="number" id="qty-coffeehome" min="0" value="" placeholder="e.g. 3" oninput="recalculate()"></div><div class="control-group" style="flex:0;"><label>Frequency</label><div class="freq-toggle"><button class="freq-btn active" id="freq-coffeehome-d" onclick="setFreq('coffeehome','d')">Daily</button><button class="freq-btn" id="freq-coffeehome-w" onclick="setFreq('coffeehome','w')">Weekly</button></div></div><div class="control-group"><label>Cost per cup — CAD $</label><input type="number" id="price-coffeehome" min="0" step="0.01" value="" oninput="recalculate()" placeholder="0.75"></div></div><div class="price-note" id="note-coffeehome"></div><div class="row-cost" id="cost-coffeehome">$0 / mo</div></div></div>
+          <div class="substance-row"><div class="substance-top"><input type="checkbox" class="substance-checkbox" id="chk-energydrinks" onchange="toggleControls('energydrinks')"><label class="substance-label" for="chk-energydrinks">Energy drinks<small>Red Bull, Monster, Celsius, Rockstar etc.</small></label></div><div class="substance-controls" id="ctrl-energydrinks"><div class="controls-row"><div class="control-group"><label>Cans</label><input type="number" id="qty-energydrinks" min="0" value="" placeholder="e.g. 2" oninput="recalculate()"></div><div class="control-group" style="flex:0;"><label>Frequency</label><div class="freq-toggle"><button class="freq-btn active" id="freq-energydrinks-d" onclick="setFreq('energydrinks','d')">Daily</button><button class="freq-btn" id="freq-energydrinks-w" onclick="setFreq('energydrinks','w')">Weekly</button></div></div><div class="control-group"><label>Cost per can — CAD $</label><input type="number" id="price-energydrinks" min="0" step="0.01" value="" oninput="recalculate()" placeholder="4.50"></div></div><div class="price-note" id="note-energydrinks"></div><div class="row-cost" id="cost-energydrinks">$0 / mo</div></div></div>
+          <div class="substance-row"><div class="substance-top"><input type="checkbox" class="substance-checkbox" id="chk-cola" onchange="toggleControls('cola')"><label class="substance-label" for="chk-cola">Cola / caffeinated soft drinks<small>Coke, Pepsi, Dr Pepper etc.</small></label></div><div class="substance-controls" id="ctrl-cola"><div class="controls-row"><div class="control-group"><label>Cans / bottles</label><input type="number" id="qty-cola" min="0" value="" placeholder="e.g. 2" oninput="recalculate()"></div><div class="control-group" style="flex:0;"><label>Frequency</label><div class="freq-toggle"><button class="freq-btn active" id="freq-cola-d" onclick="setFreq('cola','d')">Daily</button><button class="freq-btn" id="freq-cola-w" onclick="setFreq('cola','w')">Weekly</button></div></div><div class="control-group"><label>Cost per can — CAD $</label><input type="number" id="price-cola" min="0" step="0.01" value="" oninput="recalculate()" placeholder="2.50"></div></div><div class="price-note" id="note-cola"></div><div class="row-cost" id="cost-cola">$0 / mo</div></div></div>
+        </div>
+      </div>
+
+      <!-- FOOD -->
+      <div class="calc-section-card" id="sec-food">
+        <div class="calc-section-header" onclick="toggleSection('sec-food')">
+          <div class="calc-section-header-left">
+            <div class="calc-section-title-text">
+              <div class="title">Food</div>
+              <div class="sub">Sugar, ultra-processed &amp; fast food</div>
+            </div>
+          </div>
+          <div class="calc-section-right">
+            <div class="calc-badge" id="badge-food"></div>
+            <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+        </div>
+        <div class="calc-section-body">
+          <div class="substance-row"><div class="substance-top"><input type="checkbox" class="substance-checkbox" id="chk-fastfood" onchange="toggleControls('fastfood')"><label class="substance-label" for="chk-fastfood">Fast food / takeout<small>McDonald's, Subway, Domino's, Uber Eats etc.</small></label></div><div class="substance-controls" id="ctrl-fastfood"><div class="controls-row"><div class="control-group"><label>Orders</label><input type="number" id="qty-fastfood" min="0" value="" placeholder="e.g. 4" oninput="recalculate()"></div><div class="control-group" style="flex:0;"><label>Frequency</label><div class="freq-toggle"><button class="freq-btn" id="freq-fastfood-d" onclick="setFreq('fastfood','d')">Daily</button><button class="freq-btn active" id="freq-fastfood-w" onclick="setFreq('fastfood','w')">Weekly</button></div></div><div class="control-group"><label>Avg. spend per order — CAD $</label><input type="number" id="price-fastfood" min="0" step="0.01" value="" oninput="recalculate()" placeholder="18.00"></div></div><div class="price-note" id="note-fastfood"></div><div class="row-cost" id="cost-fastfood">$0 / mo</div></div></div>
+          <div class="substance-row"><div class="substance-top"><input type="checkbox" class="substance-checkbox" id="chk-sugarsnacks" onchange="toggleControls('sugarsnacks')"><label class="substance-label" for="chk-sugarsnacks">Sugary snacks &amp; sweets<small>Candy, chocolate, baked goods, cookies</small></label></div><div class="substance-controls" id="ctrl-sugarsnacks"><div class="controls-row"><div class="control-group"><label>Items</label><input type="number" id="qty-sugarsnacks" min="0" value="" placeholder="e.g. 2" oninput="recalculate()"></div><div class="control-group" style="flex:0;"><label>Frequency</label><div class="freq-toggle"><button class="freq-btn active" id="freq-sugarsnacks-d" onclick="setFreq('sugarsnacks','d')">Daily</button><button class="freq-btn" id="freq-sugarsnacks-w" onclick="setFreq('sugarsnacks','w')">Weekly</button></div></div><div class="control-group"><label>Avg. spend each — CAD $</label><input type="number" id="price-sugarsnacks" min="0" step="0.01" value="" oninput="recalculate()" placeholder="4.00"></div></div><div class="price-note" id="note-sugarsnacks"></div><div class="row-cost" id="cost-sugarsnacks">$0 / mo</div></div></div>
+        </div>
+      </div>
+
+      <!-- DIGITAL -->
+      <div class="calc-section-card" id="sec-digital">
+        <div class="calc-section-header" onclick="toggleSection('sec-digital')">
+          <div class="calc-section-header-left">
+            <div class="calc-section-title-text">
+              <div class="title">Digital &amp; behavioural</div>
+              <div class="sub">Gaming, online shopping, social media</div>
+            </div>
+          </div>
+          <div class="calc-section-right">
+            <div class="calc-badge" id="badge-digital"></div>
+            <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+        </div>
+        <div class="calc-section-body">
+          <div class="substance-row"><div class="substance-top"><input type="checkbox" class="substance-checkbox" id="chk-gaming" onchange="toggleControls('gaming')"><label class="substance-label" for="chk-gaming">Video game purchases &amp; in-game spending<small>Games, DLC, microtransactions, loot boxes</small></label></div><div class="substance-controls" id="ctrl-gaming"><div class="controls-row"><div class="control-group"><label>Amount spent — CAD $</label><input type="number" id="qty-gaming" min="0" value="" placeholder="e.g. 25" oninput="recalculate()"></div><div class="control-group" style="flex:0;"><label>Frequency</label><div class="freq-toggle"><button class="freq-btn" id="freq-gaming-d" onclick="setFreq('gaming','d')">Daily</button><button class="freq-btn active" id="freq-gaming-w" onclick="setFreq('gaming','w')">Weekly</button></div></div></div><div class="price-note">Enter total spending on games and in-game purchases</div><div class="row-cost" id="cost-gaming">$0 / mo</div></div></div>
+          <div class="substance-row"><div class="substance-top"><input type="checkbox" class="substance-checkbox" id="chk-onlineshopping" onchange="toggleControls('onlineshopping')"><label class="substance-label" for="chk-onlineshopping">Compulsive online shopping<small>Amazon, Shein, Temu impulse purchases etc.</small></label></div><div class="substance-controls" id="ctrl-onlineshopping"><div class="controls-row"><div class="control-group"><label>Impulse spend — CAD $</label><input type="number" id="qty-onlineshopping" min="0" value="" placeholder="e.g. 50" oninput="recalculate()"></div><div class="control-group" style="flex:0;"><label>Frequency</label><div class="freq-toggle"><button class="freq-btn" id="freq-onlineshopping-d" onclick="setFreq('onlineshopping','d')">Daily</button><button class="freq-btn active" id="freq-onlineshopping-w" onclick="setFreq('onlineshopping','w')">Weekly</button></div></div></div><div class="price-note">Enter the amount spent on non-essential or regretted purchases</div><div class="row-cost" id="cost-onlineshopping">$0 / mo</div></div></div>
+        </div>
+      </div>
+
+      <!-- RESULTS -->
+      <div class="calc-results" id="calc-results">
+        <div class="calc-results-title">Your estimated addiction costs</div>
+        <div id="calc-empty" class="calc-empty"><p>Select one or more items above to see your costs.</p></div>
+        <div id="calc-content" style="display:none;">
+          <div class="calc-results-grid">
+            <div class="calc-result-card">
+              <div class="calc-result-label">Monthly cost</div>
+              <div class="calc-result-amount"><span class="dollar">$</span><span id="val-monthly">0</span></div>
+              <div class="calc-result-sublabel">per month</div>
+            </div>
+            <div class="calc-result-card highlight">
+              <div class="calc-result-label">Annual cost</div>
+              <div class="calc-result-amount"><span class="dollar">$</span><span id="val-annual">0</span></div>
+              <div class="calc-result-sublabel">per year</div>
+            </div>
+          </div>
+          <div class="breakdown">
+            <div class="breakdown-title">Monthly breakdown</div>
+            <div id="breakdown-list"></div>
+          </div>
+          <div class="reflection-box"><p id="reflection-text"></p></div>
+        </div>
+        <div class="calc-actions">
+          <button class="calc-reset-btn" onclick="resetAll()">Reset calculator</button>
+        </div>
+      </div>
+
+      <p class="calc-disclaimer" id="calc-disclaimer"></p>
+
+    </div><!-- /modal-body -->
+
+    <div class="modal-footer">
+      <button class="modal-done-btn" onclick="copyAndClose()">Copy My Results &amp; Return to Form</button>
+      <p class="modal-footer-note">Results will be automatically pasted<br>into the form field below.</p>
+    </div>
+
+  </div><!-- /modal-panel -->
+</div><!-- /modal-overlay -->
+
+<script>
+// ── PRICE DATA ────────────────────────────────────────────────────────────────
+const PRICES_2026 = {
+  cigarettes:19.00,ryo:12.00,vape:18.00,patch:2.50,gum:0.80,pouches:14.00,cigars:12.00,
+  chew:16.00,lozenges:0.75,inhaler:2.00,nasal:55.00,pipe:28.00,beer:3.50,wine:5.00,spirits:4.00,cocktails:14.00,coolers:4.00,
+  cannabis:9.00,hashish:12.00,cannabisedibles:8.00,heroin:80.00,fentanyl:20.00,oxycodone:20.00,
+  cocaine:90.00,crack:20.00,meth:60.00,benzos:8.00,sleepingpills:6.00,ketamine:70.00,mdma:40.00,coffee:6.50,coffeehome:0.75,energydrinks:4.50,cola:2.50,
+  fastfood:18.00,sugarsnacks:4.00
+};
+const PRICE_NOTES_2026 = {
+  cigarettes:'~$19 / pack — Vancouver Island 2026 est.',ryo:'~$12 / 25g pouch — BC 2026 est.',
+  vape:'~$18 / disposable or pod — BC 2026 est.',patch:'~$2.50 / patch — BC 2026 est.',
+  gum:'~$0.80 / piece — BC 2026 est.',pouches:'~$14 / can — BC 2026 est.',
+  cigars:'~$12 / cigar — BC 2026 est.',chew:'~$16 / tin — BC 2026 est.',
+  pipe:'~$28 / 50g pouch — BC 2026 est.',lozenges:'~$0.75 / lozenge — BC 2026 est.',inhaler:'~$2.00 / cartridge — BC 2026 est.',nasal:'~$55 / bottle — BC 2026 est.',beer:'~$3.50 / can at home — BC 2026 est.',
+  wine:'~$5.00 / glass — BC 2026 est.',spirits:'~$4.00 / shot at home — BC 2026 est.',
+  cocktails:'~$14 / bar drink — Vancouver Island 2026 est.',coolers:'~$4.00 / can — BC 2026 est.',
+  cannabis:'~$9 / g — Vancouver Island 2026 est.',hashish:'Est. ~$10–$15 / g — Vancouver Island 2026 est.',cannabisedibles:'~$8 / unit — BC 2026 est.',
+  heroin:'Est. ~$60–$100 / g — Vancouver Island 2026',fentanyl:'Est. ~$15–$25 / point — Vancouver Island 2026',
+  oxycodone:'Est. ~$15–$30 / pill — Vancouver Island 2026',cocaine:'Est. ~$80–$100 / g — Vancouver Island 2026',
+  meth:'Est. ~$50–$80 / g — Vancouver Island 2026',benzos:'Est. ~$5–$10 / pill — Vancouver Island 2026',
+  coffee:'~$6.50 / specialty coffee — Vancouver Island 2026 est.',coffeehome:'~$0.75 / cup at home — BC 2026 est.',
+  energydrinks:'~$4.50 / can — BC 2026 est.',cola:'~$2.50 / can — BC 2026 est.',
+  fastfood:'~$18 / meal — Vancouver Island 2026 est.',sugarsnacks:'~$4.00 / item — BC 2026 est.'
+};
+const ANNUAL_RATE = 0.04;
+
+function getInflatedPrice(id) {
+  const base = PRICES_2026[id];
+  if (base === undefined) return null;
+  const yrs = Math.max(0, new Date().getFullYear() - 2026);
+  return base * Math.pow(1 + ANNUAL_RATE, yrs);
+}
+
+function initPrices() {
+  const yr = new Date().getFullYear();
+  const yrs = Math.max(0, yr - 2026);
+  for (const id of Object.keys(PRICES_2026)) {
+    const priceEl = document.getElementById('price-' + id);
+    const noteEl  = document.getElementById('note-' + id);
+    const inflated = getInflatedPrice(id);
+    if (priceEl) { priceEl.placeholder = inflated.toFixed(2); priceEl.value = ''; }
+    if (noteEl) {
+      let note = PRICE_NOTES_2026[id] || '';
+      if (yrs > 0) {
+        note = note.replace('2026', yr.toString());
+        note = note.replace(/~\$([\d.]+)/g, (_,n) => `~$${(parseFloat(n)*Math.pow(1.04,yrs)).toFixed(2)}`);
+      }
+      noteEl.textContent = note;
+    }
+  }
+  const d = document.getElementById('calc-disclaimer');
+  if (d) d.textContent = `All prices are estimates based on ${yr} Vancouver Island / BC market rates. Street drug prices reflect approximate local averages and will vary. Prices auto-adjust each January 1st. For awareness purposes only — not medical or financial advice.`;
+}
+
+// ── SUBSTANCES CONFIG ─────────────────────────────────────────────────────────
+const substances = {
+  cigarettes:{label:'Cigarettes (factory-made)',calcMode:'cigarettes',packSize:20},
+  ryo:{label:'Cigarettes (roll-your-own)',calcMode:'ryo'},
+  vape:{label:'Nicotine vape pens',calcMode:'qty_price'},
+  patch:{label:'Nicotine patches',calcMode:'qty_price'},
+  gum:{label:'Nicotine gum',calcMode:'qty_price'},
+  pouches:{label:'Nicotine pouches',calcMode:'qty_price'},
+  cigars:{label:'Cigars',calcMode:'qty_price'},
+  chew:{label:'Chewing tobacco / snuff',calcMode:'qty_price'},
+  lozenges:{label:'Nicotine lozenges / mints',calcMode:'qty_price'},
+  inhaler:{label:'Nicotine inhaler',calcMode:'qty_price'},
+  nasal:{label:'Nicotine nasal spray',calcMode:'qty_price'},
+  pipe:{label:'Pipe tobacco',calcMode:'qty_price'},
+  beer:{label:'Beer',calcMode:'qty_price'},
+  wine:{label:'Wine',calcMode:'qty_price'},
+  spirits:{label:'Spirits / liquor',calcMode:'qty_price'},
+  cocktails:{label:'Bar / restaurant drinks',calcMode:'qty_price'},
+  coolers:{label:'Coolers, ciders & seltzers',calcMode:'qty_price'},
+  cannabis:{label:'Cannabis (flower)',calcMode:'qty_price'},
+  hashish:{label:'Hashish',calcMode:'qty_price'},
+  cannabisedibles:{label:'Cannabis edibles & concentrates',calcMode:'qty_price'},
+  heroin:{label:'Heroin / street opioids',calcMode:'qty_price'},
+  fentanyl:{label:'Fentanyl',calcMode:'qty_price'},
+  oxycodone:{label:'Pain medication',calcMode:'qty_price'},
+  cocaine:{label:'Cocaine (powder)',calcMode:'qty_price'},
+  crack:{label:'Crack cocaine',calcMode:'qty_price'},
+  meth:{label:'Methamphetamine',calcMode:'qty_price'},
+  benzos:{label:'Benzodiazepines',calcMode:'qty_price'},
+  sleepingpills:{label:'Sleeping pills / Z-drugs',calcMode:'qty_price'},
+  ketamine:{label:'Ketamine',calcMode:'qty_price'},
+  mdma:{label:'MDMA / ecstasy',calcMode:'qty_price'},
+  casino:{label:'Casino / slots',calcMode:'qty_price'},
+  sportsbetting:{label:'Sports betting',calcMode:'sportsbetting'},
+  lottery:{label:'Lottery / scratch tickets',calcMode:'qty_only'},
+  poker:{label:'Online poker',calcMode:'qty_price'},
+  coffee:{label:'Coffee (purchased)',calcMode:'qty_price'},
+  coffeehome:{label:'Coffee (made at home)',calcMode:'qty_price'},
+  energydrinks:{label:'Energy drinks',calcMode:'qty_price'},
+  cola:{label:'Cola / soft drinks',calcMode:'qty_price'},
+  fastfood:{label:'Fast food / takeout',calcMode:'qty_price'},
+  sugarsnacks:{label:'Sugary snacks & sweets',calcMode:'qty_price'},
+  gaming:{label:'Video game spending',calcMode:'qty_only'},
+  onlineshopping:{label:'Compulsive online shopping',calcMode:'qty_only'},
+};
+
+const sectionMap = {
+  nicotine:['cigarettes','ryo','vape','patch','gum','pouches','cigars','chew','lozenges','inhaler','nasal','pipe'],
+  alcohol:['beer','wine','spirits','cocktails','coolers'],
+  drugs:['cannabis','hashish','cannabisedibles','heroin','fentanyl','oxycodone','cocaine','crack','meth','benzos','sleepingpills','ketamine','mdma'],
+  gambling:['casino','sportsbetting','lottery','poker'],
+  caffeine:['coffee','coffeehome','energydrinks','cola'],
+  food:['fastfood','sugarsnacks'],
+  digital:['gaming','onlineshopping'],
+};
+
+const freqState = {};
+const AVG = 30.44;
+
+function setFreq(id, freq) {
+  freqState[id] = freq;
+  const d = document.getElementById('freq-'+id+'-d');
+  const w = document.getElementById('freq-'+id+'-w');
+  if (d) d.classList.toggle('active', freq==='d');
+  if (w) w.classList.toggle('active', freq==='w');
+  recalculate();
+}
+
+function getFreq(id) { return freqState[id] || (document.getElementById('freq-'+id+'-d')?.classList.contains('active') ? 'd' : 'w'); }
+
+function getEffectivePrice(id) {
+  const el = document.getElementById('price-'+id);
+  if (!el) return getInflatedPrice(id)||0;
+  const v = parseFloat(el.value);
+  return (!isNaN(v) && v>0) ? v : (getInflatedPrice(id)||0);
+}
+
+function computeMonthly(id) {
+  const def = substances[id];
+  const qty = parseFloat(document.getElementById('qty-'+id)?.value)||0;
+  const price = getEffectivePrice(id);
+  const mult = getFreq(id)==='d' ? AVG : AVG/7;
+  switch(def.calcMode) {
+    case 'qty_price':     return qty*price*mult;
+    case 'qty_only':      return qty*mult;
+    case 'sportsbetting': return qty*price*0.1*mult;
+    case 'cigarettes':    return (qty/(def.packSize||20))*price*mult;
+    case 'ryo':           return (qty/50)*price*mult;
+    default:              return 0;
+  }
+}
+
+function toggleControls(id) {
+  const chk  = document.getElementById('chk-'+id);
+  const ctrl = document.getElementById('ctrl-'+id);
+  if (ctrl) ctrl.classList.toggle('visible', !!(chk&&chk.checked));
+  recalculate();
+}
+
+function recalculate() {
+  let total = 0;
+  const breakdown = [];
+  for (const [id, def] of Object.entries(substances)) {
+    const chk = document.getElementById('chk-'+id);
+    if (!chk||!chk.checked) continue;
+    const m = computeMonthly(id);
+    const costEl = document.getElementById('cost-'+id);
+    if (costEl) costEl.textContent = '$'+fmt(m)+' / mo';
+    total += m;
+    breakdown.push({label:def.label, monthly:m});
+  }
+  for (const [sec, ids] of Object.entries(sectionMap)) {
+    let secT = 0;
+    ids.forEach(id => { const c=document.getElementById('chk-'+id); if(c&&c.checked) secT+=computeMonthly(id); });
+    const badge = document.getElementById('badge-'+sec);
+    if (badge) { badge.style.display = secT>0?'block':'none'; if(secT>0) badge.textContent='$'+fmt(secT)+'/mo'; }
+  }
+  const annual = total*12;
+  const empty   = document.getElementById('calc-empty');
+  const content = document.getElementById('calc-content');
+  if (total===0) { if(empty) empty.style.display='block'; if(content) content.style.display='none'; return; }
+  if(empty) empty.style.display='none';
+  if(content) content.style.display='block';
+  document.getElementById('val-monthly').textContent = fmt(total);
+  document.getElementById('val-annual').textContent  = fmt(annual);
+  const bList = document.getElementById('breakdown-list');
+  if (bList) {
+    bList.innerHTML = '';
+    breakdown.sort((a,b)=>b.monthly-a.monthly).forEach(item=>{
+      const row = document.createElement('div');
+      row.className = 'breakdown-item';
+      row.innerHTML = `<span class="breakdown-name">${item.label}</span><span class="breakdown-cost">$${fmt(item.monthly)}/mo</span>`;
+      bList.appendChild(row);
+    });
+  }
+  const annualFmt = fmt(annual);
+  let msg = '';
+  if (annual<3000) msg=`At <strong>$${annualFmt} per year</strong>, even a modest addiction has a real financial cost. Imagine what that money could mean invested in your health and your future.`;
+  else if (annual<10000) msg=`<strong>$${annualFmt} every year</strong> is enough for a family vacation, a year of fitness memberships, or a meaningful contribution to your savings. Investing in treatment now means keeping more of that money for what truly matters.`;
+  else if (annual<25000) msg=`<strong>$${annualFmt} per year</strong> is the equivalent of a year of tuition, a new vehicle, or years of mortgage payments. Recovery is an investment — and one that pays dividends in every area of your life.`;
+  else msg=`<strong>$${annualFmt} per year</strong> is a life-changing sum. Over five years, that's <strong>$${fmt(annual*5)}</strong>. The cost of effective treatment is a fraction of what you're spending today.`;
+  const rt = document.getElementById('reflection-text');
+  if (rt) rt.innerHTML = msg;
+}
+
+function fmt(n) { return n.toLocaleString('en-CA',{minimumFractionDigits:0,maximumFractionDigits:0}); }
+
+function toggleSection(id) {
+  document.getElementById(id).classList.toggle('open');
+}
+
+function resetAll() {
+  document.querySelectorAll('.substance-checkbox').forEach(el=>{ el.checked=false; });
+  document.querySelectorAll('.substance-controls').forEach(el=>{ el.classList.remove('visible'); });
+  recalculate();
+}
+
+function copyResults() {
+  const monthly = document.getElementById('val-monthly')?.textContent;
+  const annual  = document.getElementById('val-annual')?.textContent;
+  if (!monthly||monthly==='0') return;
+  const yr = new Date().getFullYear();
+  let usageLines = '';
+  const sectionLabels = {nicotine:'NICOTINE',alcohol:'ALCOHOL',drugs:'DRUGS',gambling:'GAMBLING',caffeine:'CAFFEINE',food:'FOOD',digital:'DIGITAL & BEHAVIOURAL'};
+  for (const [sec, ids] of Object.entries(sectionMap)) {
+    const active = ids.filter(id=>{ const c=document.getElementById('chk-'+id); return c&&c.checked; });
+    if (!active.length) continue;
+    usageLines += `\n${sectionLabels[sec]}\n`;
+    active.forEach(id=>{
+      const def = substances[id];
+      const qty = parseFloat(document.getElementById('qty-'+id)?.value)||0;
+      const freq = getFreq(id)==='d'?'daily':'weekly';
+      usageLines += `  • ${def.label}: ${def.calcMode==='qty_only'?'$'+qty+' CAD':qty+' units'} ${freq}  →  $${fmt(computeMonthly(id))}/mo\n`;
+    });
+  }
+  const text = `ADDICTION COST & USAGE SUMMARY\nGenerated: ${new Date().toLocaleDateString('en-CA',{year:'numeric',month:'long',day:'numeric'})}\n${'─'.repeat(40)}\n\nFINANCIAL TOTALS\n  Monthly cost:  $${monthly} CAD\n  Annual cost:   $${annual} CAD\n\n${'─'.repeat(40)}\nUSAGE DETAILS\n${usageLines}\n${'─'.repeat(40)}\nCalculated using the LCH addiction cost calculator — ${yr} Vancouver Island estimates.`;
+  const btn = document.getElementById('calc-copy-btn');
+  navigator.clipboard.writeText(text).then(()=>confirmCopy(btn,text)).catch(()=>{
+    const ta = document.createElement('textarea');
+    ta.value = text; ta.style.cssText='position:fixed;opacity:0;';
+    document.body.appendChild(ta); ta.select(); document.execCommand('copy');
+    document.body.removeChild(ta); confirmCopy(btn, text);
+  });
+}
+
+// Store last copied text so closeCalculator can always paste it
+let lastCopiedResults = '';
+
+function confirmCopy(btn, text) {
+  lastCopiedResults = text;
+  const orig = btn.textContent;
+  btn.textContent = '✓ Copied!';
+  btn.classList.add('copied');
+  // Paste into form textarea immediately
+  const textarea = document.getElementById('calc-results-field');
+  if (textarea) textarea.value = text;
+  setTimeout(()=>{ btn.textContent=orig; btn.classList.remove('copied'); }, 3000);
+}
+
+// ── MODAL ─────────────────────────────────────────────────────────────────────
+function openCalculator() {
+  document.getElementById('calc-modal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function getEmptyQtyItems() {
+  const empty = [];
+  document.querySelectorAll('.substance-checkbox:checked').forEach(chk => {
+    const id = chk.id.replace('chk-', '');
+    const qtyEl = document.getElementById('qty-' + id);
+    if (qtyEl) {
+      const val = parseFloat(qtyEl.value);
+      if (!val || val <= 0) {
+        const labelEl = document.querySelector('label[for="' + chk.id + '"]');
+        const labelText = labelEl ? labelEl.childNodes[0].textContent.trim() : id;
+        empty.push(labelText);
+      }
+    }
+  });
+  return empty;
+}
+
+function copyAndClose() {
+  const monthly = document.getElementById('val-monthly')?.textContent;
+  if (!monthly || monthly === '0') {
+    // Check if anything is checked with no qty
+    const emptyItems = getEmptyQtyItems();
+    if (emptyItems.length > 0) {
+      showCalcWarning(emptyItems);
+      return;
+    }
+    closeCalculator();
+    return;
+  }
+  const emptyItems = getEmptyQtyItems();
+  if (emptyItems.length > 0) {
+    showCalcWarning(emptyItems);
+    return;
+  }
+  copyResults();
+  setTimeout(() => closeCalculator(), 350);
+}
+
+function showCalcWarning(items) {
+  const existing = document.getElementById('calc-qty-warning');
+  if (existing) existing.remove();
+
+  const warning = document.createElement('div');
+  warning.id = 'calc-qty-warning';
+  warning.style.cssText = 'background:#fdf0ea;border:1.5px solid #d4896d;border-radius:10px;padding:14px 18px;margin-top:16px;font-size:12px;font-weight:500;color:#a85a3c;line-height:1.7;';
+
+  const names = items.map(function(n) { return '<span style="display:block;margin-top:3px;">· ' + n + '</span>'; }).join('');
+  warning.innerHTML = '<strong style="display:block;margin-bottom:4px;">Please enter a usage amount for the following:</strong>' + names + '<span style="display:block;margin-top:8px;font-weight:400;color:#c17a5a;font-style:italic;">Enter how often you use each item so we can calculate your costs accurately.</span>';
+
+  // Insert inside modal-body right after the results block so it stays in the scrollable area
+  const calcResults = document.getElementById('calc-results');
+  if (calcResults) {
+    calcResults.insertAdjacentElement('afterend', warning);
+  } else {
+    const modalBody = document.querySelector('.modal-body');
+    if (modalBody) modalBody.appendChild(warning);
+  }
+
+  // Scroll the warning into view
+  setTimeout(function() { warning.scrollIntoView({behavior:'smooth', block:'nearest'}); }, 60);
+
+  // Highlight the empty qty fields and focus the first one
+  var focused = false;
+  document.querySelectorAll('.substance-checkbox:checked').forEach(function(chk) {
+    var id = chk.id.replace('chk-', '');
+    var qtyEl = document.getElementById('qty-' + id);
+    if (qtyEl) {
+      var val = parseFloat(qtyEl.value);
+      if (!val || val <= 0) {
+        qtyEl.style.borderColor = '#d4896d';
+        qtyEl.style.background = '#fff8f5';
+        if (!focused) {
+          setTimeout(function() { qtyEl.focus(); }, 80);
+          focused = true;
+        }
+        qtyEl.addEventListener('input', function() {
+          this.style.borderColor = '';
+          this.style.background = '';
+          var w = document.getElementById('calc-qty-warning');
+          if (w) w.remove();
+        }, {once: true});
+      }
+    }
+  });
+
+  setTimeout(function() { var w = document.getElementById('calc-qty-warning'); if(w) w.remove(); }, 9000);
+}
+
+
+function closeCalculator() {
+  document.getElementById('calc-modal').classList.remove('open');
+  document.body.style.overflow = '';
+  // Show results field and paste if we have copied results
+  const monthly = document.getElementById('val-monthly')?.textContent;
+  if (monthly && monthly !== '0') {
+    document.getElementById('pasted-results').classList.add('visible');
+    // Always paste the latest results on close
+    if (lastCopiedResults) {
+      const textarea = document.getElementById('calc-results-field');
+      if (textarea) textarea.value = lastCopiedResults;
+    }
+  }
+}
+function handleModalClick(e) {
+  if (e.target === document.getElementById('calc-modal')) closeCalculator();
+}
+
+// ── TREATMENT CHIPS ───────────────────────────────────────────────────────────
+function handleTreatmentChange() {
+  document.querySelectorAll('.treatment-chip').forEach(chip => {
+    const input = chip.querySelector('input[type="checkbox"]');
+    chip.classList.toggle('selected', input && input.checked);
+  });
+  const hasAddiction = Array.from(document.querySelectorAll('.treatment-chip[data-addiction="true"] input')).some(i=>i.checked);
+  const notice = document.getElementById('calc-trigger-notice');
+  const pastedResults = document.getElementById('pasted-results');
+  if (notice) notice.classList.toggle('visible', hasAddiction);
+  if (pastedResults) pastedResults.classList.toggle('visible', hasAddiction);
+}
+
+// ── PHONE FIELD TOGGLE ────────────────────────────────────────────────────────
+function togglePhoneField() {
+  const phoneChecked = document.querySelector('input[value="Phone"]:checked') || document.querySelector('input[value="Text"]:checked');
+  const phoneField = document.getElementById('phone-field');
+  if (phoneField) phoneField.classList.toggle('visible', !!phoneChecked);
+}
+
+// ── FORM VALIDATION & SUBMIT ──────────────────────────────────────────────────
+function showError(fieldId, errorId) {
+  const field = document.getElementById(fieldId);
+  const error = document.getElementById('err-' + errorId);
+  if (field) field.classList.add('error');
+  if (error) error.classList.add('visible');
+}
+function clearError(fieldId, errorId) {
+  const field = document.getElementById(fieldId);
+  const error = document.getElementById('err-' + (errorId||fieldId));
+  if (field) { field.classList.remove('error'); field.addEventListener('input', ()=>{ field.classList.remove('error'); }, {once:true}); }
+  if (error) error.classList.remove('visible');
+}
+
+// Populate local Pacific time on submission
+function getLocalTimeString() {
+  const now = new Date();
+  return now.toLocaleString('en-CA', {
+    timeZone: 'America/Vancouver',
+    weekday: 'short',
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit',
+    timeZoneName: 'short'
+  });
+}
+
+document.getElementById('contact-form').addEventListener('submit', async function(e) {
+  // Set local time just before submission
+  document.getElementById('submission-time').value = getLocalTimeString();
+  e.preventDefault();
+  let valid = true;
+  document.getElementById('form-error-banner').classList.remove('visible');
+
+  // First name
+  if (!document.getElementById('first-name').value.trim()) { showError('first-name','first-name'); valid=false; } else clearError('first-name','first-name');
+  // Last name
+  if (!document.getElementById('last-name').value.trim()) { showError('last-name','last-name'); valid=false; } else clearError('last-name','last-name');
+  // Email
+  const email = document.getElementById('email').value.trim();
+  if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { showError('email','email'); valid=false; } else clearError('email','email');
+  // Contact method
+  const contactMethods = document.querySelectorAll('input[name="contact_method[]"]:checked');
+  if (contactMethods.length===0) { document.getElementById('err-contact-method').classList.add('visible'); valid=false; } else document.getElementById('err-contact-method').classList.remove('visible');
+  // Phone (if phone or text selected)
+  const needsPhone = document.querySelector('input[value="Phone"]:checked') || document.querySelector('input[value="Text"]:checked');
+  if (needsPhone && !document.getElementById('phone').value.trim()) { showError('phone','phone'); valid=false; } else clearError('phone','phone');
+  // Consultation format
+  const format = document.querySelector('input[name="consultation_format"]:checked');
+  if (!format) { document.getElementById('err-consult-format').classList.add('visible'); valid=false; } else document.getElementById('err-consult-format').classList.remove('visible');
+  // Message
+  if (!document.getElementById('message').value.trim()) { showError('message','message'); valid=false; } else clearError('message','message');
+  // Consent
+  if (!document.getElementById('consent-privacy').checked) { document.getElementById('err-consent').classList.add('visible'); valid=false; } else document.getElementById('err-consent').classList.remove('visible');
+
+  if (!valid) {
+    document.getElementById('form-error-banner').classList.add('visible');
+    document.querySelector('.form-error-banner').scrollIntoView({behavior:'smooth', block:'center'});
+    return;
+  }
+
+  // Submit
+  const btn = document.getElementById('submit-btn');
+  btn.disabled = true;
+  btn.textContent = 'Sending…';
+
+  try {
+    const formData = new FormData(this);
+    const response = await fetch(this.action, {
+      method: 'POST',
+      body: formData,
+      headers: { 'Accept': 'application/json' }
+    });
+    if (response.ok) {
+      document.getElementById('form-wrapper').querySelector('form').style.display = 'none';
+      document.querySelector('.form-header').style.display = 'none';
+      document.querySelector('.privacy-banner').style.display = 'none';
+      document.getElementById('success-screen').classList.add('visible');
+      window.scrollTo({top:0, behavior:'smooth'});
+    } else {
+      btn.disabled = false;
+      btn.textContent = 'Submit Inquiry';
+      alert('There was a problem submitting the form. Please try again or contact us directly at nanaimo@laserhealthcenters.ca');
+    }
+  } catch(err) {
+    btn.disabled = false;
+    btn.textContent = 'Submit Inquiry';
+    alert('There was a problem submitting the form. Please try again or contact us directly at nanaimo@laserhealthcenters.ca');
+  }
+});
+
+// ── QTY FIELD BLUR HINT ──────────────────────────────────────────────────────
+// When user opens a substance control and leaves qty blank, show gentle hint
+document.addEventListener('change', function(e) {
+  if (e.target.classList.contains('substance-checkbox') && e.target.checked) {
+    const id = e.target.id.replace('chk-', '');
+    const qtyEl = document.getElementById('qty-' + id);
+    if (qtyEl) {
+      qtyEl.addEventListener('blur', function() {
+        if (!this.value || parseFloat(this.value) <= 0) {
+          this.style.borderColor = 'var(--terracotta-light)';
+        } else {
+          this.style.borderColor = '';
+        }
+      }, { once: false });
+    }
+  }
+});
+
+// ── INIT ──────────────────────────────────────────────────────────────────────
+initPrices();
+recalculate();
+</script>
+</body>
+</html>

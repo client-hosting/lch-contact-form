@@ -2162,5 +2162,16 @@ document.addEventListener('change', function(e) {
 initPrices();
 recalculate();
 </script>
+<script>
+  function sendHeight() {
+    var height = document.body.scrollHeight;
+    window.parent.postMessage({ frameHeight: height }, '*');
+  }
+  window.addEventListener('load', sendHeight);
+  window.addEventListener('resize', sendHeight);
+
+  var observer = new MutationObserver(sendHeight);
+  observer.observe(document.body, { subtree: true, childList: true, attributes: true });
+</script>
 </body>
 </html>

@@ -1039,6 +1039,7 @@ select {
   .section-title-bar { padding: 16px 18px 0; }
 }
 </style>
+<script src="https://cdn.jsdelivr.net/npm/@iframe-resizer/child@5.5.9"></script>
 </head>
 <body>
 
@@ -2163,30 +2164,6 @@ document.addEventListener('change', function(e) {
 // ── INIT ──────────────────────────────────────────────────────────────────────
 initPrices();
 recalculate();
-</script>
-<script>
-  function sendHeight() {
-    if (document.getElementById('calc-modal').classList.contains('open')) return;
-    const form = document.getElementById('form-wrapper');
-    const height = form ? form.getBoundingClientRect().height : document.body.scrollHeight;
-    window.parent.postMessage({ frameHeight: Math.ceil(height) }, '*');
-  }
-
-  window.addEventListener('load', sendHeight);
-  window.addEventListener('resize', sendHeight);
-
-  var observer = new MutationObserver(function(mutations) {
-    for (var i = 0; i < mutations.length; i++) {
-      var m = mutations[i];
-      if (m.target.id === 'calc-modal' || 
-          (m.target.closest && m.target.closest('#calc-modal'))) continue;
-      sendHeight();
-      break;
-    }
-  });
-  observer.observe(document.getElementById('form-wrapper'), { 
-    subtree: true, childList: true, attributes: true 
-  });
 </script>
 </body>
 </html>

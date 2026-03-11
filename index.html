@@ -1980,6 +1980,7 @@ function showCalcWarning(items) {
 
 function closeCalculator() {
   document.getElementById('calc-modal').classList.remove('open');
+  sendHeight();
   // Show results field and paste if we have copied results
   const monthly = document.getElementById('val-monthly')?.textContent;
   if (monthly && monthly !== '0') {
@@ -2164,9 +2165,10 @@ recalculate();
 </script>
 <script>
   function sendHeight() {
-    var height = document.body.scrollHeight;
-    window.parent.postMessage({ frameHeight: height }, '*');
-  }
+  // Don't resize the iframe while the calculator modal is open
+  if (document.getElementById('calc-modal').classList.contains('open')) return;
+  window.parent.postMessage({ frameHeight: document.body.scrollHeight }, '*');
+}
   window.addEventListener('load', sendHeight);
   window.addEventListener('resize', sendHeight);
 

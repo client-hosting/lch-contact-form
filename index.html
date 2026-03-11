@@ -2165,15 +2165,27 @@ recalculate();
 </script>
 <script>
   function sendHeight() {
-  // Don't resize the iframe while the calculator modal is open
-  if (document.getElementById('calc-modal').classList.contains('open')) return;
-  window.parent.postMessage({ frameHeight: document.body.scrollHeight }, '*');
-}
+    if (document.getElementById('calc-modal').classList.contains('open')) return;
+    const form = document.getElementById('form-wrapper');
+    const height = form ? form.getBoundingClientRect().height : document.body.scrollHeight;
+    window.parent.postMessage({ frameHeight: Math.ceil(height) }, '*');
+  }
+
   window.addEventListener('load', sendHeight);
   window.addEventListener('resize', sendHeight);
 
-  var observer = new MutationObserver(sendHeight);
-  observer.observe(document.body, { subtree: true, childList: true, attributes: true });
+  var observer = new MutationObserver(function(mutations) {
+    for (var i = 0; i < mutations.length; i++) {
+      var m = mutations[i];
+      if (m.target.id === 'calc-modal' || 
+          (m.target.closest && m.target.closest('#calc-modal'))) continue;
+      sendHeight();
+      break;
+    }
+  });
+  observer.observe(document.getElementById('form-wrapper'), { 
+    subtree: true, childList: true, attributes: true 
+  });
 </script>
 </body>
 </html>

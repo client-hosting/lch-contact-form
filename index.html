@@ -2129,6 +2129,7 @@ document.getElementById('contact-form').addEventListener('submit', async functio
       document.querySelector('.privacy-banner').style.display = 'none';
       document.getElementById('success-screen').classList.add('visible');
       window.scrollTo({top:0, behavior:'smooth'});
+      window.parent.postMessage({ scrollToTop: true }, '*');
     } else {
       btn.disabled = false;
       btn.textContent = 'Submit Inquiry';
